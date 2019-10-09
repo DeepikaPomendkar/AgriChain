@@ -1,0 +1,123 @@
+<head>
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<style type="text/css">
+	body  {
+              background-image: url("https://wallpaperplay.com/walls/full/c/2/1/57997.jpg");
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+
+
+
+        }
+
+.content-wrapper >div{
+display:none;
+}
+
+.content-wrapper1 >div{
+display:none;
+}
+.scrollbar-light-blue::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px; }
+
+.scrollbar-light-blue::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5; }
+
+.scrollbar-light-blue::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #82B1FF; }
+
+.square::-webkit-scrollbar-track {
+  border-radius: 0 !important; }
+
+.square::-webkit-scrollbar-thumb {
+  border-radius: 0 !important; }
+
+.thin::-webkit-scrollbar {
+  width: 6px; }
+
+.example-1 {
+  margin-left:50px;
+  position:relative;
+  overflow-y: scroll;
+  height: 430px;
+  min-width:100vh;
+}
+.example-2 {
+  margin-left:50px;
+  position:relative;
+  overflow-y: scroll;
+  height: 430px;
+  min-width:100vh;
+}
+.carousel-inner img {
+	justify-content: center;
+      width: 75%;
+      height: 75%;
+  }
+input[type="text"]::placeholder {
+
+                /* Firefox, Chrome, Opera */
+                text-align: center;
+            }
+</style>
+<script>
+  $(function(){
+    var $allItems =  $(".content-wrapper > div");
+    $(document.body).on("click", "a.show", function () {
+        var id = this.id, itemId = "#item-" + id;
+        $allItems.not($(itemId).toggle()).hide();
+    });
+    var $allItems1 =  $(".content-wrapper1 > div");
+    $(document.body).on("click", "a.show", function () {
+    	console.log("here");
+        var id = this.id, itemId = "#items-" + id;
+        $allItems1.not($(itemId).toggle()).hide();
+    });
+});
+
+
+</script>
+
+{% if stake == "processor"  %}
+	<nav class="navbar navbar-expand-sm  fixed-top "style="background: rgba(255, 255, 255, 0.4);width: 100%;margin-bottom: 40px">
+
+{% else %}
+
+	<nav class="navbar navbar-expand-sm  fixed-top "style="opacity: 0.8;width: 100%;margin-bottom: 40px">
+
+{% endif %}
+
+	    <div class="container">
+	      <h2><b><a class="navbar-brand" href="index.html" style="color:black">Agro<span>Chain.</span></a></b></h2>
+	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu" style="color:black"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav nav ml-auto">
+	          <li class="nav-item"><a href="{% url 'user-home' %}" class="nav-link" style="color:black"><b><span>Home</span></b></a></li>
+	          <li class="nav-item"><a href="#about-section" class="nav-link" style="color:black"><b><span>About</span></b></a></li>
+	          <li class="nav-item"><a href="#about-section" class="nav-link" style="color:black"><b><span>Profile</span></b></a></li>
+
+
+
+	        </ul>
+	      </div>
+	    </div>
+</nav>
+
+{% block content %}
+
+{% endblock %}

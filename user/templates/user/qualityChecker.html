@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+    <!--{% for x in data %}-->
+    	<!--<div class="row" style="margin-top:30px">-->
+			<!--<form method="POST" action={% url 'qualityChecker' %}>-->
+    		<!--<div class="col-md-5">-->
+					<!--Name: {{x.name}}-->
+			    	<!--<br>-->
+			    	<!--Email: {{x.email}}-->
+			    	<!---->
+			    	<!--<br>-->
+			    	<!--Crop Name: {{x.cropName}}-->
+			    	<!--<br>-->
+			    	<!--Farmer Key: {{x.farmerKey}}-->
+			    	<!--<br>-->
+			    	<!--Farmer Lot Key: {{x.farmerLotKey}}-->
+			    	<!--<br>-->
+			    	<!--Quantity Requested: {{x.quantityRequested}}-->
+			<!--</div>-->
+			<!--<div class="col-md-7">-->
+
+					<!--{% csrf_token %}-->
+					<!--<div>-->
+						<!--Remarks:-->
+						<!--<textarea name="remark"></textarea><br>-->
+					<!--</div>-->
+					<!--Farmer Id:-->
+					<!--<input name="farmerKey" type="text" value="{{x.farmerKey}}" class="field left" readonly><br>-->
+					<!--Sample Size:-->
+					<!--<input name="sampleSize" type="text"><br>-->
+					<!--Defective:-->
+					<!--<input name="defective" type="text"><br>-->
+
+
+					<!--<button type="submit" name="accept" value="accept" class="btn btn-primary" >Accept</button>-->
+				<!--<button type="submit" name="decline" value="decline" class="btn btn-warning" >Reject</button>-->
+				<!--<form>-->
+			<!--</div>-->
+		<!--</div>-->
+
+    <!--{% endfor %}-->
+
+<div>
+     <span id="button1"> Check Requests</span>
+
+        {% csrf_token %}
+        {% for x in data %}
+        <div class="card bg-success text-white">
+            <!--<p>Hey this is Request no 1</p>-->
+            <form action="{% url 'qualityChecker' %}" method="POST" id="form1">
+                {% csrf_token %}
+            <div class="card-body">
+
+                <p>{{x.cropName}}</p>
+                <p>{{x.farmerKey}}</p>
+                <p>{{x.farmerLotKey}}</p>
+                <p>{{x.quantityRequested}}</p>
+                <p>{{x.interestKey}}</p>
+				<input type="hidden" value = "{{x.farmerLotKey}}" name="lotKey">
+				<input type="hidden" value = "{{x.cropName}}" name="cropName">
+				<input type="hidden" value = "{{x.quantityRequested}}" name="quantity">
+				<input type="hidden" value = "{{x.interestKey}}" name="interestKey">
+                <div>
+						Remarks:
+						<textarea name="remark"></textarea><br>
+					</div>
+					Farmer Id:
+					<input name="farmerKey" type="text" value="{{x.farmerKey}}" class="field left" readonly><br>
+					Sample Size:
+					<input name="sampleSize" type="text"><br>
+					Defective:
+					<input name="defective" type="text"><br>
+    	      <button type="submit" name="pushButton" value="accept" class="btn btn-warning" >Push Report</button>
+                <!--<a href="{% url 'processor' %}" class="btn btn-primary stretched-link">Accept</a>-->
+    	      <!--<button type="submit" name="rejectButton" value="reject" class="btn btn-warning" >Deny</button>-->
+            </div>
+                </form>
+        </div>
+        {% endfor %}
+
+</div>
+
+</body>
+</html>

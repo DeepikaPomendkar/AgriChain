@@ -1,0 +1,209 @@
+
+
+
+
+{% extends "user/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container" style="height:700px;width:90%;margin-top:100px;margin-left:auto;margin-right:auto;background: rgba(255, 255, 255, 0.4);">
+  <br><br><br><br>
+
+
+
+
+    <div class="row" style="display: block;text-align: center;">
+
+
+      <h3><span ><a id="1" class="show" style="border-left: solid;border-right: solid;cursor: pointer;"> Broadcast </a></span>
+      <span><a id="2" class="show" style="border-right: solid;cursor: pointer;"> Farmer Broadcasts </a></span>
+      <span><a id="3" class="show" style="border-right: solid;cursor: pointer;"> Processor Requests </a></span>
+      <span><a id="5" class="show" style="border-right: solid;cursor: pointer;"> Transactions </a></span>
+      <span><a id="4" class="show" style="border-right: solid;cursor: pointer;"> Lot Status </a></span></h3>
+
+    </div>
+    <div class="content-wrapper">
+
+
+
+        <div id="item-1" style="text-align: center;margin-top: 50px;">
+          <div class="row" style="display:block;text-align: center">
+            <h4 >Broadcast your Crop details!</h4>
+          </div>
+          <form action="{% url 'farmer' %}" method="POST" id="form" name="form">
+            {% csrf_token %}
+          <!--<p><input type="text" placeholder="username"/></p>-->
+          <!--<p><input type="password" placeholder="password" /></p>-->
+          <!--<p><input type="submit" value="Sign in" /></p>-->
+              <input type="text" name = "farmerId" placeholder="Farmer Id" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
+              <input type="text" name = "cropName" placeholder="Crop Name" style="margin-top: 10px;border-radius: 25px;width:375px""/><br>
+              <input type="text" name = "quantity" placeholder="Quantity" style="margin-top: 10px;border-radius: 25px;width:375px""/><br>
+              <input type="text" name = "expectedPrice" placeholder="Expected Price" style="margin-top: 10px;border-radius: 25px;width:375px""/><br>
+              <button type="submit" class="btn btn-primary" name="broadcast" style="margin-top: 10px;border-radius: 25px;width:200px">Submit Details!!</button>
+          </form>
+        </div>
+        <div class="container" id="item-2" style="text-align: center;margin-top: 50px" >
+          <div class="row"  style="display:block;text-align: center">
+            <h4>Your Broadcasts.</h4>
+          </div>
+          <div class="row example-1 scrollbar-deep-purple scrollbar-light-blue "   >
+            {% for dat in data %}
+              <div class="col-md-4" style="margin-top: 10px">
+                <div class="card " >
+                          <div class="card-block" >
+                            <h5><p class="card-text"><u>Crop Name:</u> {{dat.cropName}}</p>
+                            <p class="card-text"><u>Farmer Id:</u> {{dat.farmerId}}</p>
+                            <p class="card-text"><u>Quantity :</u> {{dat.quantity}}</p>
+                            <p class="card-text"><u>Expected Price :</u>{{dat.expectedPrice}}</p></h5>
+                          </div>
+
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+        </div>
+
+
+
+        <div class="container" id="item-3" style="text-align: center;margin-top: 50px">
+          <div class="row"  style="display:block;text-align: center">
+            <h4>Your Processor Requests</h4>
+          </div>
+          <div class="row example-1 scrollbar-deep-purple scrollbar-light-blue "  >
+
+
+            {% for dat in results %}
+            <div class="col-md-4" style="margin-top: 10px">
+              <div class="card  ">
+                  <!--<p>Hey this is Request no 1</p>-->
+                  <form action="{% url 'farmer' %}" method="POST">
+                      {% csrf_token %}
+                      <div class="card-block">
+
+                          <h6><p class="card-text">Crop Name:{{dat.cropName}}</p>
+                          <p class="card-text">ProcessorKey:{{dat.processorKey}}</p>
+                          <p class="card-text">Requested Quantity:{{dat.quantityRequested}}</p>
+                          <p class="card-text">Quoted Price:{{dat.quotedPrice}}</p></h6>
+
+
+                          <input type="hidden" name="cropName" value="{{dat.cropName}}">
+                          <input type="hidden" name="farmerKey" value="{{dat.farmerKey}}">
+                          <input type="hidden" name="farmerId" value="{{dat.farmerId}}">
+                          <input type="hidden" name="quantity" value="{{dat.quantity}}">
+                          <input type="hidden" name="expectedPrice" value="{{dat.expectedPrice}}">
+                          <input type="hidden" name="processorKey" value="{{dat.processorKey}}">
+                          <input type="hidden" name="selfKey" value="{{dat.selfKey}}">
+                      <button type="submit" name="insurance" value="insurance" class="btn btn-warning" >Send To Insure</button>
+                      <!--<button type="submit" name="acceptButton" value="accept" class="btn btn-warning" >Accept</button>-->
+                          <!--<a href="{% url 'processor' %}" class="btn btn-primary stretched-link">Accept</a>-->
+                      <!--<button type="submit" name="rejectButton" value="reject" class="btn btn-warning" >Deny</button>-->
+                      </div>
+                  </form>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div id="item-4">
+          Lot Status
+             <style>
+    ol.progtrckr {
+    margin: 0;
+    padding: 0;
+    list-style-type none;
+}
+
+ol.progtrckr li {
+    display: inline-block;
+    text-align: center;
+    line-height: 3.5em;
+}
+
+ol.progtrckr[data-progtrckr-steps="2"] li { width: 49%; }
+ol.progtrckr[data-progtrckr-steps="3"] li { width: 33%; }
+ol.progtrckr[data-progtrckr-steps="4"] li { width: 24%; }
+ol.progtrckr[data-progtrckr-steps="5"] li { width: 19%; }
+ol.progtrckr[data-progtrckr-steps="6"] li { width: 16%; }
+ol.progtrckr[data-progtrckr-steps="7"] li { width: 14%; }
+ol.progtrckr[data-progtrckr-steps="8"] li { width: 12%; }
+ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
+
+ol.progtrckr li.progtrckr-done {
+    color: black;
+    border-bottom: 4px solid yellowgreen;
+}
+ol.progtrckr li.progtrckr-todo {
+    color: silver;
+    border-bottom: 4px solid silver;
+}
+
+ol.progtrckr li:after {
+    content: "\00a0\00a0";
+}
+ol.progtrckr li:before {
+    position: relative;
+    bottom: -2.5em;
+    float: left;
+    left: 50%;
+    line-height: 1em;
+}
+ol.progtrckr li.progtrckr-done:before {
+    content: "\2713";
+    color: white;
+    background-color: yellowgreen;
+    height: 2.2em;
+    width: 2.2em;
+    line-height: 2.2em;
+    border: none;
+    border-radius: 2.2em;
+}
+ol.progtrckr li.progtrckr-todo:before {
+    content: "\039F";
+    color: silver;
+    background-color: white;
+    font-size: 2.2em;
+    bottom: -1.2em;
+}
+
+
+</style>
+    <script src="{% static 'javascripts/user.js' %}"></script>
+<form method="POST" action="{% url 'farmer' %}">
+    <script>
+
+        var sel = document.getElementById('lotIdSelect');
+
+    </script>
+    {% csrf_token %}
+<select id='idSelect' name="idSelect">
+            <option value="" selected="selected" hidden>Yields</option>
+</select>
+    <input type="hidden" name="lotIdSelected" id = "lotIdSelected">
+    <input type="hidden" name="idSelected" id="idSelected">
+<select id='lotIdSelect' name="lotIdSelect">
+            <option value="" selected="selected" hidden>Lot Id Select</option>
+
+</select>
+<button type="submit" name="statusButton ">Check Status!!!</button>
+</form>
+<div id ="productTracker" class="ptracker" >
+    <ol class="progtrckr" data-progtrckr-steps="5">
+    <li class="progtrckr-done">Order Processing</li><!--
+ --><li class="progtrckr-done">Pre-Production</li><!--
+ --><li class="progtrckr-todo">In Production</li><!--
+ --><li class="progtrckr-todo">Shipped</li><!--
+ --><li class="progtrckr-todo">Delivered</li>
+</ol>
+        </div>
+
+
+
+    </div>
+</div>
+{% endblock content %}
+
+
+<!--</form>-->
