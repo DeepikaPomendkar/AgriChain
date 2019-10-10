@@ -296,12 +296,13 @@ def processor(request):
     temp = []
     reportPaidTransactions = []
     pendingFarmerTransactions = []
+
     #print(sess)
     dataForFarmerTransactions = database.child("user").child("Processor").child("Confirmed Farmer Orders").child(sess).get()
     for transaction in dataForFarmerTransactions.each():
         transactionKey = transaction.key()
         transactionValue = transaction.val()
-        print(transactionValue)
+        print("-----------------",transactionValue)
         # print(transactionValue)
 
         # print(transactionValue['paymentStatus'])
@@ -347,7 +348,7 @@ def processor(request):
         if (tempTransact['paymentStatus'] == 1 and tempTransact['reportStatus'] == 1):
             transactionHistoryValues.append(tempTransact)
 
-            print("-------------------------------------",transactionHistoryValues)
+           
     data = database.child("user").child("Processor").child("Confirmed Farmer Orders").child(processorId).get()
     
     lots =[]
@@ -380,7 +381,18 @@ def processor(request):
                     dict1.update(item1)
                     RorderDetails.append(dict1)
     #print("-------------------------------------",transactionHistoryValues)
-    return render(request, 'user/processor.html',{'data':temp,'farmerPaymentData':pendingFarmerTransactions,'reportPaidTransactions':reportPaidTransactions,'transactionHistory':transactionHistoryValues,'lots':lots,'orderDetails':RorderDetails})
+    #his broadcasts 
+
+    #Broadcast of processors
+    data = database.child("user").child("Processor").child("products").child(processorId).get()
+    processorBroadcasts = data.val()
+    broadcastList =[]
+    # print(processorBroadcasts)
+    for key , processorData in processorBroadcasts.items():
+        broadcastDetails = processorData
+        broadcastList.append(broadcastDetails)
+    print("---------------",broadcastList)
+    return render(request, 'user/processor.html',{'data':temp,'farmerPaymentData':pendingFarmerTransactions,'reportPaidTransactions':reportPaidTransactions,'transactionHistory':transactionHistoryValues,'lots':lots,'orderDetails':RorderDetails,'broadcastList':broadcastList})
 def signIn(request):
     # if method == 'POST':
 
@@ -525,12 +537,16 @@ def retailer(request):
     print(productDetails)
 
     # display confirmed orders
-    temp = database.child("user").child("Retailer").child('Confirmed Processor Orders').child(retailerId).get()
-    orderDetails = []
+    temp=database.child("user").child("Retailer").child("Confirmed Processor Orders").child(retailerId).get()
+    orderDetails=[]
+    print("TEMP-------------------",temp.val())
     for x in temp.each():
-        z = x.val()
 
-        orderDetails.append(z)
+        print(x)
+        for key,item in x.val().items():
+            
+        
+            orderDetails.append(item)
 
      # Broadcast for retailer
     processorKeys = []

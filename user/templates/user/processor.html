@@ -94,8 +94,25 @@
                     <div class="row"  style="display:block;text-align: center">
                       <h4>Your Product Broadcasts.</h4>
                     </div>
+                    <div class="row example-1 scrollbar-deep-purple scrollbar-light-blue "   >
+                       {% for dat in broadcastList %}
+                       <div class="col-md-4" style="margin-top: 10px">
+                          <div class="card ">
+                              <!--<p>Hey this is Request no 1</p>-->
 
-                    Cool
+                              <div class="card-block">
+
+                                  <h5><p class="card-text">Product Name : {{dat.productName}}</p>
+                                  <p class="card-text">Total quantity : {{dat.quantity}}</p>
+                                  <p class="card-text">Available: {{dat.availableQuantity}}</p>
+
+                                  <p class="card-text">Price : {{dat.Price}}</p></h5>
+                                </div>
+
+                          </div>
+                        </div>
+                        {% endfor %}
+                      </div>
 
           </div>
     </div>
@@ -217,7 +234,7 @@
 
 
                                     Farmer Key:<p>{{dat.farmerKey}}</p>
-                                    Lot Number:<p>{{dat.lotNumber}}</p>
+                                    
                                     Quantity:<p>{{dat.quantity}}</p>
 
 
@@ -235,7 +252,7 @@
     <div id="items-7" style="text-align: center;margin-top: 50px;">
             {% csrf_token %}
             <div class="row"  style="display:block;text-align: center">
-                      <h4>Payments with Farmer.</h4>
+                      <h4>Payments with report Farmer.</h4>
             </div>
             <div class="row example-1 scrollbar-deep-purple scrollbar-light-blue ">
 

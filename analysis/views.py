@@ -4,14 +4,14 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 import json
 from django.http import JsonResponse
-import matplotlib.pyplot as plt,mpld3
+import matplotlib.pyplot as plt
 
 def index(request):
     return render(request,'user/analyse.html')
 
 def analyse(request):
     post_id = request.GET.get('post_id')
-    df = pd.read_csv("D:\\ACI_HACKATHON\\analysis\\new.csv")
+    df = pd.read_csv("media/csvfiles/new.csv")
     predict_year_labels = [2013,2014,2015,2016,
                    2017,2018,2019]
     year_labels = [1999,2000,2001,2002,2003,2004,
