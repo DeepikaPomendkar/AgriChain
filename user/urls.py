@@ -15,4 +15,5 @@ urlpatterns = [
     path('qualityChecker/',views.qualityChecker,name='qualityChecker'),
     path('payments/',views.payments,name='payments'),
     path('farmer/getData/',views.getData,name='getData'),
+    path('retailer/getData/',views.getData,name='getData'),
 ]

@@ -36,9 +36,9 @@
           <!--<p><input type="text" placeholder="username"/></p>-->
           <!--<p><input type="password" placeholder="password" /></p>-->
           <!--<p><input type="submit" value="Sign in" /></p>-->
-              <input type="text" name = "farmerId" placeholder="Farmer Id" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
-              <input type="text" name = "cropName" placeholder="Crop Name" style="margin-top: 10px;border-radius: 25px;width:375px""/><br>
-              <input type="text" name = "quantity" placeholder="Quantity" style="margin-top: 10px;border-radius: 25px;width:375px""/><br>
+              <input type="text" readonly name = "farmerName" placeholder="{{farmerName}}" style="margin-top: 10px;border-radius: 25px;width:375px"><br>
+              <input type="text" name = "cropName" placeholder="Crop Name" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
+              <input type="text" name = "quantity" placeholder="Quantity" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
               <input type="text" name = "expectedPrice" placeholder="Expected Price" style="margin-top: 10px;border-radius: 25px;width:375px""/><br>
               <button type="submit" class="btn btn-primary" name="broadcast" style="margin-top: 10px;border-radius: 25px;width:200px">Submit Details!!</button>
           </form>
@@ -53,7 +53,6 @@
                 <div class="card " >
                           <div class="card-block" >
                             <h5><p class="card-text"><u>Crop Name:</u> {{dat.cropName}}</p>
-                            <p class="card-text"><u>Farmer Id:</u> {{dat.farmerId}}</p>
                             <p class="card-text"><u>Quantity :</u> {{dat.quantity}}</p>
                             <p class="card-text"><u>Expected Price :</u>{{dat.expectedPrice}}</p></h5>
                           </div>
@@ -83,14 +82,14 @@
                       <div class="card-block">
 
                           <h6><p class="card-text">Crop Name:{{dat.cropName}}</p>
-                          <p class="card-text">ProcessorKey:{{dat.processorKey}}</p>
+                          <p class="card-text">Processor Name:{{dat.processorName}}</p>
                           <p class="card-text">Requested Quantity:{{dat.quantityRequested}}</p>
                           <p class="card-text">Quoted Price:{{dat.quotedPrice}}</p></h6>
 
 
                           <input type="hidden" name="cropName" value="{{dat.cropName}}">
                           <input type="hidden" name="farmerKey" value="{{dat.farmerKey}}">
-                          <input type="hidden" name="farmerId" value="{{dat.farmerId}}">
+                          <input type="hidden" name="farmerName" value="{{farmerName}}">
                           <input type="hidden" name="quantity" value="{{dat.quantity}}">
                           <input type="hidden" name="expectedPrice" value="{{dat.expectedPrice}}">
                           <input type="hidden" name="processorKey" value="{{dat.processorKey}}">

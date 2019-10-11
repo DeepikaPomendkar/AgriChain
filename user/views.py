@@ -35,11 +35,12 @@ database = firebase.database()
 auth = firebase.auth()
 def farmer(request):
     sess = request.session['uid']
-
+    data = database.child("user").child("Farmer").child(sess).get()
+    farmerName = data.val()['name']
     if request.method == 'POST':
         if "broadcast" in request.POST:
             temp = {
-                'farmerId' : request.POST.get('farmerId'),
+                'farmerName' : farmerName ,
                 'cropName' : request.POST.get('cropName'),
                 'quantity' : int(request.POST.get('quantity')),
                 'expectedPrice' : int(request.POST.get('expectedPrice')),
@@ -112,10 +113,13 @@ def farmer(request):
             if values['farmerKey'] == sess:
                 dict = {'processorKey': entry.key()}
                 dict1 = {'selfKey': key}
+                proname = database.child("user").child("Processor").child(entry.key()).get().val()['name']
+                proName={'processorName':proname}
                 # print(key)
                 val = values
                 val.update(dict)
                 val.update(dict1)
+                val.update(proName)
                 results.append(val)
     # print(results)
     # transaction from processor
@@ -129,7 +133,7 @@ def farmer(request):
 
     getFarmerYields(sess)
     # print("results:", results)
-    return render(request,'user/farmer.html',{'data':temp,'results':results})
+    return render(request,'user/farmer.html',{'data':temp,'results':results , 'farmerName' : farmerName})
 
 
 
@@ -503,7 +507,7 @@ def retailer(request):
                 'lotKey': request.POST.get('lotKey')
             }
             processorKey = request.POST.get('processorKey')
-            database.child("user").child("Retailer").child('Confirmed Processor Orders').child(retailerId).push(
+            database.child("user").child("Retailer").child('Confirmed Processor Orders').child(retailerId).child(processorKey).push(
                 transaction)
 
             # change the available quantity
@@ -548,7 +552,7 @@ def retailer(request):
         
             orderDetails.append(item)
 
-     # Broadcast for retailer
+    # Broadcast for retailer
     processorKeys = []
     transactionDetails = []
     data = database.child("user").child("Retailer").child("Confirmed Processor Orders").child(retailerId).get()
@@ -560,11 +564,11 @@ def retailer(request):
         product = entry.val()
         print(product)
         print("23r768trqwd6tet1tw3etqt12yityiet12378t")
-        for key in product.keys():
+        for key,value in product.items():
             transactionKeys = {'transactionKey' : key}
             details.update(transactionKeys)
             details.update(processorKey)
-            details.update(product[key])
+            details.update(value)
             details.update(retailerKey)
             transactionDetails.append(details)
     print("--------------------------")
@@ -575,7 +579,7 @@ def retailer(request):
             transactionKey = request.POST['dropdown2']
             data = database.child("user").child("Retailer").child("Confirmed Processor Orders").child(retailerId).child(request.POST['dropdown1']).child(transactionKey).get()
             item = {
-                'processorKey': request.POST['dropdown1'],
+                # 'processorKey': request.POST['dropdown1'],
                 'transactionKey': request.POST['dropdown2'],
                 'totalQuantity': int(request.POST.get('quantity')),
                 'Price': int(request.POST.get('Price')),
@@ -583,7 +587,7 @@ def retailer(request):
                 'availableQuantity': int(request.POST.get('quantity')),
                 'productName' : data.val()['productName']
             }
-            database.child("user").child("Retailer").child('products').child(retailerId).push(item)
+            database.child("user").child("Retailer").child('products').child(retailerId).child(request.POST['dropdown1']).push(item)
 
     return render(request , 'user/retailer.html' ,
                   {'data' : productDetails, 'orderDetails':orderDetails ,
@@ -626,11 +630,12 @@ def getFarmerYields(farmerId,detailed = 0):
 
     return yieldIds
 
+
 def getData(request):
-    sess = request.session['uid']
-    post_id = request.GET.get('requestData')
+    post_id = request.GET.get('post_id')
 
     if post_id == 'yieldIds':
+        sess = request.session['uid']
         yieldIds = getFarmerYields(sess)
         dataToBeTransferred = []
         for i in range(len(yieldIds)):
@@ -640,6 +645,7 @@ def getData(request):
         print(dataToBeTransferred)
         return JsonResponse(dataToBeTransferred,safe=False)
     elif post_id == 'lotIds':
+        sess = request.session['uid']
         print('else ma che')
         selectedItem = request.GET.get('selectedItem')
         checkerId = "0zGbx6o6oiWIqqABxfy5Qxo07kh2"
@@ -656,3 +662,25 @@ def getData(request):
                 dataToBeTransferred.append({'lotNumbers':interestKey})
         print(dataToBeTransferred)
         return JsonResponse(dataToBeTransferred,safe=False)
+    elif post_id == 'getTransactionKey':
+        print('gayyaaaaaaaaaaaaaaaa')
+        transactionKeyValues = []
+        retailerKey = request.session['uid']
+        processorKey = request.GET.get('processorKey')
+        data = database.child("user").child("Retailer").child("Confirmed Processor Orders").child(retailerKey).child(processorKey).get()
+        for i in data.each():
+            dictionary = {
+                'transactionKey': i.key(),
+                'productName' : i.val()['productName'],
+            }
+            transactionKeyValues.append(dictionary)
+
+        return JsonResponse(transactionKeyValues,safe=False)
+    elif post_id == 'getQuantity':
+        retailerKey = request.session['uid']
+        transactionKey = request.GET.get('transactionKey')
+        processorKey = request.GET.get('processorKey')
+        data = database.child("user").child("Retailer").child("Confirmed Processor Orders").child(retailerKey).child(processorKey).child(transactionKey).get()
+
+        return JsonResponse({'key' : data.val()['requiredQuantity']}, safe=False)
+

@@ -4,7 +4,7 @@ $(document).ready(function(){
             type: "GET",
             url: "getData/",
             data: {
-				'requestData':'yieldIds'
+				'post_id':'yieldIds'
             },
             success: function (data) {
 //                alert(data);
@@ -27,7 +27,7 @@ $(document).ready(function(){
                 type: "GET",
                 url: "getData/",
                 data: {
-                    'requestData':'lotIds',
+                    'post_id':'lotIds',
                     'selectedItem': selectedItem,
                 },
                 success: function (data) {
