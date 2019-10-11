@@ -21,4 +21,5 @@ urlpatterns = [
     path('',include('user.urls')),
     path('predict/',include('predict.urls')),
     path('analysis/',include('analysis.urls')),
+    path('marker/',include('marker.urls')),
 ]
