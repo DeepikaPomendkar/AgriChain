@@ -5,7 +5,7 @@ from sklearn.neighbors import KNeighborsClassifier
 # Create your views here.
 
 def predict1(request):
-    import pandas as pd
+
     import numpy as np
     # import os
     optimum = pd.read_excel("media/csvfiles/optimum2.xlsx", 'newData')

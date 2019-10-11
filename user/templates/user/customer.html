@@ -29,6 +29,13 @@
                     </div>
                     <div class="row example-1 scrollbar-deep-purple scrollbar-light-blue " >
                       {% for x in productList %}
+                        <form method="POST" action ="{% url 'customer' %}">
+                            {% csrf_token %}
+                            {{x.transactionKey}}
+                            <input type="hidden" name="transactionKey" value="{{x.transactionKey}}">
+                            <input type="hidden" name="processorKey" value="{{x.processorKey}}">
+                            <input type="hidden" name="retailerKey" value="{{x.retailerKey}}">
+
                         <div class="col-md-4" style="margin-top: 10px">
                             <div class="card " >
 
@@ -48,6 +55,8 @@
 
                         </div>
 
+                            <button type="submit" name="getReports">Get Reports</button>
+                        </form>
                       {% endfor %}
 
                     </div>

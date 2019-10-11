@@ -133,8 +133,8 @@
 
         <h4><span ><a id="4" class="show" style="border-left: solid;border-right: solid;cursor: pointer;"> Farmer Products Brodcasts </a></span>
         <span><a id="5" class="show" style="border-right: solid;cursor: pointer;">Pending Payments </a></span>
-            <span><a id="6" class="show" style="border-right: solid;cursor: pointer;">Payments with Farmer</a></span>
-            <span><a id="7" class="show" style="border-right: solid;cursor: pointer;">Transaction & Report added</a></span>
+            <span><a id="6" class="show" style="border-right: solid;cursor: pointer;">Payments with Report added</a></span>
+            <span><a id="7" class="show" style="border-right: solid;cursor: pointer;">Add Report </a></span>
             <span><a id="8" class="show" style="border-right: solid;cursor: pointer;">Interests of Processors</a></span>
             <span><a id="9" class="show" style="border-right: solid;cursor: pointer;">Rejected Interests by farmers</a></span>
         </h4>
@@ -226,7 +226,7 @@
         <div id="items-6" style="text-align: center;margin-top: 50px;">
                 {% csrf_token %}
                 <div class="row"  style="display:block;text-align: center">
-                          <h4>Payments with Farmer.</h4>
+                          <h4>Payments with report Added .</h4>
                 </div>
                 <div class="row example-1 scrollbar-deep-purple scrollbar-light-blue ">
                     {% for dat in transactionHistory %}
@@ -257,7 +257,7 @@
     <div id="items-7" style="text-align: center;margin-top: 50px;">
             {% csrf_token %}
             <div class="row"  style="display:block;text-align: center">
-                      <h4>Payments with report Farmer.</h4>
+                      <h4>Add report for Farmer product.</h4>
             </div>
             <div class="row example-1 scrollbar-deep-purple scrollbar-light-blue ">
 

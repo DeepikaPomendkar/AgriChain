@@ -23,9 +23,8 @@ firebaseConfig = {
 ganache_url = "http://127.0.0.1:7545"
 web3 = Web3(Web3.HTTPProvider(ganache_url))
 web3.eth.defaultAccount = web3.eth.accounts[0]
-abi = json.loads(
-    '[{"constant":false,"inputs":[{"name":"_batchNumber","type":"int256"},{"name":"_lotNumber","type":"string"}],"name":"BatchtoLot","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_processor","type":"address"},{"name":"_farmer","type":"address"},{"name":"_lotNumber","type":"string"},{"name":"_remarks","type":"string"},{"name":"_receivedShipment","type":"string"}],"name":"addProcessorReport","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_retailer","type":"address"},{"name":"_batchNumber","type":"int256"}],"name":"getRetailerReport","outputs":[{"name":"_productName","type":"string"},{"name":"_remarks","type":"string"},{"name":"_rawMaterial","type":"string"},{"name":"_manufacturedDate","type":"string"},{"name":"_quantity","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_processor","type":"address"},{"name":"_farmer","type":"address"},{"name":"_lotNumber","type":"string"}],"name":"getProcessorReport","outputs":[{"name":"_remarks","type":"string"},{"name":"_receivedShipment","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_retailer","type":"address"},{"name":"_retailerKey","type":"string"}],"name":"addRetailer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_processor","type":"address"},{"name":"_processorKey","type":"string"}],"name":"addProcessor","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_farmer","type":"address"},{"name":"_lotNumber","type":"string"}],"name":"getQualityReport","outputs":[{"name":"_remarks","type":"string"},{"name":"_inspector","type":"address"},{"name":"_sampleSize","type":"int256"},{"name":"_defective","type":"int256"},{"name":"_quantity","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_farmer","type":"address"},{"name":"_farmerKey","type":"string"}],"name":"addFarmer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_farmer","type":"address"},{"name":"_inspector","type":"address"},{"name":"_lotNumber","type":"string"},{"name":"_remarks","type":"string"},{"name":"_sampleSize","type":"int256"},{"name":"_quantity","type":"int256"},{"name":"_defective","type":"int256"}],"name":"addQualityReport","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_retailer","type":"address"},{"name":"_processor","type":"address"},{"name":"_farmer","type":"address"},{"name":"_remarks","type":"string"},{"name":"_rawMaterial","type":"string"},{"name":"_productName","type":"string"},{"name":"_manufacturedDate","type":"string"},{"name":"_quantity","type":"int256"},{"name":"_batchNumber","type":"int256"}],"name":"addRetailerReport","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_inspector","type":"address"},{"name":"_inspectorKey","type":"string"}],"name":"addInspector","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"farmerAddress","type":"address"},{"indexed":false,"name":"farmerKey","type":"string"}],"name":"farmerAddition","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"processorAddress","type":"address"},{"indexed":false,"name":"processorKey","type":"string"}],"name":"processorAddition","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"retailerAddress","type":"address"},{"indexed":false,"name":"retailerKey","type":"string"}],"name":"retailerAddition","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"inspectoAddress","type":"address"},{"indexed":false,"name":"inspectoKey","type":"string"}],"name":"inspectorAddition","type":"event"}]')
-address = web3.toChecksumAddress('0xa6393f6e0514b127c0a662fe039010f633b0945b')
+abi = json.loads('[{"constant":false,"inputs":[{"name":"_batchNumber","type":"string"},{"name":"_lotNumber","type":"string"}],"name":"BatchtoLot","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_processor","type":"address"},{"name":"_farmer","type":"address"},{"name":"_lotNumber","type":"string"},{"name":"_remarks","type":"string"},{"name":"_receivedShipment","type":"string"}],"name":"addProcessorReport","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_retailer","type":"address"},{"name":"_batchNumber","type":"string"}],"name":"getRetailerReport","outputs":[{"name":"_productName","type":"string"},{"name":"_remarks","type":"string"},{"name":"_rawMaterial","type":"string"},{"name":"_manufacturedDate","type":"string"},{"name":"_quantity","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_processor","type":"address"},{"name":"_farmer","type":"address"},{"name":"_lotNumber","type":"string"}],"name":"getProcessorReport","outputs":[{"name":"_remarks","type":"string"},{"name":"_receivedShipment","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_retailer","type":"address"},{"name":"_retailerKey","type":"string"}],"name":"addRetailer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_processor","type":"address"},{"name":"_processorKey","type":"string"}],"name":"addProcessor","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_retailer","type":"address"},{"name":"_processor","type":"address"},{"name":"_farmer","type":"address"},{"name":"_remarks","type":"string"},{"name":"_rawMaterial","type":"string"},{"name":"_productName","type":"string"},{"name":"_manufacturedDate","type":"string"},{"name":"_quantity","type":"int256"},{"name":"_batchNumber","type":"string"}],"name":"addRetailerReport","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_farmer","type":"address"},{"name":"_lotNumber","type":"string"}],"name":"getQualityReport","outputs":[{"name":"_remarks","type":"string"},{"name":"_inspector","type":"address"},{"name":"_sampleSize","type":"int256"},{"name":"_defective","type":"int256"},{"name":"_quantity","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_farmer","type":"address"},{"name":"_farmerKey","type":"string"}],"name":"addFarmer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_farmer","type":"address"},{"name":"_inspector","type":"address"},{"name":"_lotNumber","type":"string"},{"name":"_remarks","type":"string"},{"name":"_sampleSize","type":"int256"},{"name":"_quantity","type":"int256"},{"name":"_defective","type":"int256"}],"name":"addQualityReport","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_inspector","type":"address"},{"name":"_inspectorKey","type":"string"}],"name":"addInspector","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"farmerAddress","type":"address"},{"indexed":false,"name":"farmerKey","type":"string"}],"name":"farmerAddition","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"processorAddress","type":"address"},{"indexed":false,"name":"processorKey","type":"string"}],"name":"processorAddition","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"retailerAddress","type":"address"},{"indexed":false,"name":"retailerKey","type":"string"}],"name":"retailerAddition","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"inspectoAddress","type":"address"},{"indexed":false,"name":"inspectoKey","type":"string"}],"name":"inspectorAddition","type":"event"}]')
+address = web3.toChecksumAddress('0xfb0a215ce2d9748dbac279aed48e918564af9b39')
 
 contract = web3.eth.contract(address=address, abi=abi)
 
@@ -106,10 +105,12 @@ def farmer(request):
         #    print(request.GET['lotIdSelect'])
 
     data = database.child("user").child("Farmer").child('yields').child(sess).get()
-    temp = []
+    temp1 = []
     if data.val() is not None:
         for i in data.each():
-            temp.append(i.val())
+            temp1.append(i.val())
+
+
     results = []
     ordersAlreadyForInspection = []
     resultData = database.child("user").child("Quality Checker").child("0zGbx6o6oiWIqqABxfy5Qxo07kh2").child(
@@ -145,17 +146,29 @@ def farmer(request):
     # print("--------------------Processor broadcasts----------------")
     # print(results)
     # transaction from processor
-    # transactionHistoryValues = []
-    # dataForTransaction = database.child('user').child('Processor').child('Confirmed Farmer Orders').get()
+    transactionHistoryValues = []
+    dataForTransaction = database.child('user').child('Processor').child('Confirmed Farmer Orders').get()
+    for i in dataForTransaction.each():
+        val=i.val()
+        print(val)
+        for key,value in val.items():
+            if value['farmerKey']==sess and value['paymentStatus']==1:
+                temp = value
+                temp.update({'quotedPrice':value['quoted price'],'processorKey':i.key()})
+                print(i.key())
+                transactionHistoryValues.append(value)
+
+
+
     # # print(dataForTransaction.val())
     # for key,value in dataForTransaction.val().items():
     #     print(key)
     #     for val in value:
     #         print(val) 'transactionHistory':transactionHistoryValues
 
-    getFarmerYields(sess)
+    #getFarmerYields(sess)
     # print("results:", results)
-    return render(request, 'user/farmer.html', {'data': temp, 'results': results, 'farmerName': farmerName})
+    return render(request, 'user/farmer.html', {'data': temp1, 'results': results, 'farmerName': farmerName,'transactionHistoryValues':transactionHistoryValues})
 
 
 def qualityChecker(request):
@@ -181,9 +194,9 @@ def qualityChecker(request):
                 inspectorAddress = inspectorData.val()['address']
                 if farmerData is not None:
                     farmerAddress = farmerData.val()['address']
-                    # tx_hash = contract.functions.addQualityReport(farmerAddress, inspectorAddress, interestKey,
-                    #                                               remark,sampleSize,quantity,defective).transact()
-                    # tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
+                    tx_hash = contract.functions.addQualityReport(farmerAddress, inspectorAddress, interestKey,
+                                                                  remark,sampleSize,quantity,defective).transact()
+                    tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
                     data = database.child("user").child("Quality Checker").child(checkerId).child("check").get()
                     for dat in data.each():
                         key = dat.key()
@@ -251,13 +264,13 @@ def payments(request):
         account_2 = request.POST.get('receiverAddress')
         private_key = request.POST.get('selfPrivateKey')
         renderedFrom = request.POST.get('renderedFrom')
-        amountPayable = request.POST.get('amountPayable')
+        amountPayable = int(request.POST.get('amountPayable'))
 
         nonce = web3.eth.getTransactionCount(account_1)
         tx = {
             'nonce': nonce,
             'to': account_2,
-            'value': web3.toWei(amountPayable, 'ether'),
+            'value': web3.toWei(10, 'ether'),
             'gas': 2000000,
             'gasPrice': web3.toWei('50', 'gwei'),
         }
@@ -274,6 +287,36 @@ def payments(request):
             temp['paymentStatus'] = 1
             database.child("user").child("Processor").child("Confirmed Farmer Orders").child(processorKey).child(
                 lotNumber).update(temp)
+
+        elif renderedFrom == 'retailer':
+            productKey = request.POST.get('productKey')
+            availableQuantity = request.POST.get('availableQuantity')
+            processorKey = request.POST.get('processorKey')
+            retailerId = request.POST.get('retailerId')
+            productName = request.POST.get('productName')
+            requiredQuantity = request.POST.get('requiredQuantity')
+            Price = request.POST.get('Price')
+            # timestamp = request.POST.get('timestamp')
+            transaction = {
+                # 'lotKey': request.POST.get('lotKey'),
+                'productName': productName,
+                'requiredQuantity': int(requiredQuantity),
+                'Price': int(Price),
+                'timestamp': datetime.now().strftime("%d-%b-%Y (%H:%M:%S.%f)"),
+                # 'processorKey': request.POST.get('processorKey'),
+                'productKey': request.POST.get('productKey'),
+                'reportAdded': 0,
+                'lotKey': request.POST.get('lotKey')
+            }
+            database.child("user").child("Retailer").child('Confirmed Processor Orders').child(retailerId).child(
+                processorKey).push(
+                transaction)
+            database.child("user").child("Processor").child("products").child(processorKey).child(productKey).update(
+                {"availableQuantity": int(availableQuantity)})
+            print('jssssssssssssssssssssssssssssssss')
+            print(transaction)
+            print(productKey, availableQuantity, processorKey, retailerId)
+
     redirectTo = "/" + renderedFrom + "/"
     return redirect(redirectTo)
 
@@ -290,7 +333,8 @@ def processor(request):
                 'cropName': request.POST.get('cropName'),
                 'quantityRequested': request.POST.get('requiredQuantity'),
                 'quotedPrice': request.POST.get('quotedPrice'),
-                'quality': "N"
+                'quality': "N",
+                'rejected': "0"
             }
             farmerKey = request.POST.get('farmerKey')
             farmerLotKey = request.POST.get('farmerLotKey')
@@ -317,8 +361,8 @@ def processor(request):
             lotNumber = request.POST.get('lotNumber')
             processorRemarksOnPurchasedProducts = request.POST.get('processorRemarksOnPurchasedProducts')
             receivedShipments = request.POST.get('receivedShipments')
-            # tx_hash = contract.functions.addProcessorReport(processorAddress,farmerAddress, lotNumber,processorRemarksOnPurchasedProducts,receivedShipments).transact()
-            # tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
+            tx_hash = contract.functions.addProcessorReport(processorAddress,farmerAddress, lotNumber,processorRemarksOnPurchasedProducts,receivedShipments).transact()
+            tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
             reportTransactionsUpdateData = database.child("user").child("Processor").child(
                 "Confirmed Farmer Orders").child(sess).child(lotNumber).get()
             reportTransactionData = reportTransactionsUpdateData.val()
@@ -334,34 +378,36 @@ def processor(request):
     # print(sess)
     dataForFarmerTransactions = database.child("user").child("Processor").child("Confirmed Farmer Orders").child(
         sess).get()
-    for transaction in dataForFarmerTransactions.each():
-        transactionKey = transaction.key()
-        transactionValue = transaction.val()
-        print("-----------------", transactionValue)
-        # print(transactionValue)
+    print(dataForFarmerTransactions)
+    if dataForFarmerTransactions.each() != None:
+        for transaction in dataForFarmerTransactions.each():
+            transactionKey = transaction.key()
+            transactionValue = transaction.val()
+            print("-----------------", transactionValue)
+            # print(transactionValue)
 
-        # print(transactionValue['paymentStatus'])
-        amountPayable = transactionValue['quantity'] * transactionValue['quoted price']
-        temporaryData = {
-            'farmerKey': transactionValue['farmerKey'],
-            'lotNumber': transactionValue['interestKey'],
-            'quantity': transactionValue['quantity'],
-            'quotedPrice': transactionValue['quoted price'],
-            'amountPayable': amountPayable
-        }
-        if transactionValue['reportStatus'] == 0 and transactionValue['paymentStatus'] == 1:
-            farmerData = database.child("user").child("Farmer").child(transactionValue['farmerKey']).get()
-            processorData = database.child("user").child("Processor").child(sess).get()
-            reportData = {
-                'farmerAddress': farmerData.val()['address'],
-                'processorAddress': processorData.val()['address']
+            # print(transactionValue['paymentStatus'])
+            amountPayable = transactionValue['quantity'] * transactionValue['quoted price']
+            temporaryData = {
+                'farmerKey': transactionValue['farmerKey'],
+                'lotNumber': transactionValue['interestKey'],
+                'quantity': transactionValue['quantity'],
+                'quotedPrice': transactionValue['quoted price'],
+                'amountPayable': amountPayable
             }
-            reportData.update(temporaryData)
-            reportPaidTransactions.append(reportData)
-            # print(reportData)
-        if transactionValue['paymentStatus'] == 1:
-            continue
-        pendingFarmerTransactions.append(temporaryData)
+            if transactionValue['reportStatus'] == 0 and transactionValue['paymentStatus'] == 1:
+                farmerData = database.child("user").child("Farmer").child(transactionValue['farmerKey']).get()
+                processorData = database.child("user").child("Processor").child(sess).get()
+                reportData = {
+                    'farmerAddress': farmerData.val()['address'],
+                    'processorAddress': processorData.val()['address']
+                }
+                reportData.update(temporaryData)
+                reportPaidTransactions.append(reportData)
+                # print(reportData)
+            if transactionValue['paymentStatus'] == 1:
+                continue
+            pendingFarmerTransactions.append(temporaryData)
 
     for entry in data.each():
         dict = {'farmerKey': entry.key()}
@@ -385,34 +431,37 @@ def processor(request):
     rejectedInterests = []
     print("--------------------INTEREST DATAAAA-------------")
     # print(interestData)
-    for interestKey, jsonValue in interestData.items():
-        if jsonValue['rejected'] == "1":
-            rejectedInterests.append(jsonValue)
-        else:
-            processorInterests.append(jsonValue)
+    if interestData is not None:
+        for interestKey, jsonValue in interestData.items():
+            if jsonValue['rejected'] == "1":
+                rejectedInterests.append(jsonValue)
+            else:
+                processorInterests.append(jsonValue)
 
-    # Transaction History Orders Data
+        # Transaction History Orders Data
     transactionHistoryValues = []
     dataForTransaction = database.child('user').child('Processor').child('Confirmed Farmer Orders').child(sess).get()
-    for transactions in dataForTransaction.each():
-        tempTransact = transactions.val()
-        tempTransact.update({'confirmedKey': transactions.key()})
-        if (tempTransact['paymentStatus'] == 1 and tempTransact['reportStatus'] == 1):
-            transactionHistoryValues.append(tempTransact)
+    if dataForFarmerTransactions.each() != None:
+        for transactions in dataForTransaction.each():
+            tempTransact = transactions.val()
+            tempTransact.update({'confirmedKey': transactions.key()})
+            if (tempTransact['paymentStatus'] == 1 and tempTransact['reportStatus'] == 1):
+                transactionHistoryValues.append(tempTransact)
 
     data = database.child("user").child("Processor").child("Confirmed Farmer Orders").child(processorId).get()
 
     lots = []
-    for lotKey in data.each():
-        value = lotKey.val()
+    if data.each() !=None:
+        for lotKey in data.each():
+            value = lotKey.val()
 
-        interestKey = value['interestKey']
-        data = database.child("user").child("Processor").child("interests").child(processorId).child(interestKey).get()
-        cropName = data.val()['cropName']
-        dict1 = {'lot': lotKey.key()}
-        dict2 = {'cropName': cropName}
-        dict1.update(dict2)
-        lots.append(dict1)
+            interestKey = value['interestKey']
+            data = database.child("user").child("Processor").child("interests").child(processorId).child(interestKey).get()
+            cropName = data.val()['cropName']
+            dict1 = {'lot': lotKey.key()}
+            dict2 = {'cropName': cropName}
+            dict1.update(dict2)
+            lots.append(dict1)
 
     # print(lots)
     if request.method == "POST":
@@ -453,10 +502,11 @@ def processor(request):
     processorBroadcasts = data.val()
     broadcastList = []
     # print(processorBroadcasts)
-    for key, processorData in processorBroadcasts.items():
-        broadcastDetails = processorData
-        broadcastList.append(broadcastDetails)
-    print("---------------", broadcastList)
+    if processorBroadcasts is not None:
+        for key, processorData in processorBroadcasts.items():
+            broadcastDetails = processorData
+            broadcastList.append(broadcastDetails)
+    #print("---------------", broadcastList)
     return render(request, 'user/processor.html', {'data': temp, 'farmerPaymentData': pendingFarmerTransactions,
                                                    'reportPaidTransactions': reportPaidTransactions,
                                                    'processorInterests': processorInterests,
@@ -550,126 +600,222 @@ def postsignUp(request):
 
 
 def retailer(request):
-    productDetails = []
-    retailerId = request.session['uid']
+   productDetails = []
+   retailerId = request.session['uid']
 
-    if request.method == "POST":
-        if "accept" in request.POST:
-            checkData = database.child("user").child("Processor").child('products').child(
-                request.POST.get('processorKey')).child(request.POST.get('productKey')).get()
-            print('fghjkhgkhlkhlkjhlkjhlkjhhkkjkbknm')
-            print(checkData.val()['availableQuantity'])
-            if checkData.val()['availableQuantity'] < int(request.POST.get('requiredQuantity')):
-                print("inside if ")
-                return redirect('/retailer/')
-            transaction = {
-                # 'lotKey': request.POST.get('lotKey'),
-                'productName': request.POST.get('productName'),
-                'requiredQuantity': int(request.POST.get('requiredQuantity')),
-                'Price': int(request.POST.get('Price')),
-                'timestamp': datetime.now().strftime("%d-%b-%Y (%H:%M:%S.%f)"),
-                'processorKey': request.POST.get('processorKey'),
-                'productKey': request.POST.get('productKey'),
-                'reportAdded': 0,
-                'lotKey': request.POST.get('lotKey')
-            }
-            processorKey = request.POST.get('processorKey')
-            database.child("user").child("Retailer").child('Confirmed Processor Orders').child(retailerId).child(
-                processorKey).push(
-                transaction)
+   if request.method == "POST":
+       if "accept" in request.POST:
+           checkData = database.child("user").child("Processor").child('products').child(
+               request.POST.get('processorKey')).child(request.POST.get('productKey')).get()
+           print('fghjkhgkhlkhlkjhlkjhlkjhhkkjkbknm')
+           print(checkData.val()['availableQuantity'])
+           if checkData.val()['availableQuantity'] < int(request.POST.get('requiredQuantity')):
+               print("inside if ")
+               return redirect('/retailer/')
+           transaction = {
+               # 'lotKey': request.POST.get('lotKey'),
+               'productName': request.POST.get('productName'),
+               'requiredQuantity': int(request.POST.get('requiredQuantity')),
+               'Price': int(request.POST.get('Price')),
+               'timestamp': datetime.now().strftime("%d-%b-%Y (%H:%M:%S.%f)"),
+               'processorKey': request.POST.get('processorKey'),
+               'productKey': request.POST.get('productKey'),
+               'reportAdded': 0,
+               'lotKey': request.POST.get('lotKey')
+           }
+           processorKey = request.POST.get('processorKey')
+           # database.child("user").child("Retailer").child('Confirmed Processor Orders').child(retailerId).child(processorKey).push(
+           #     transaction)
+           # Add confirmed orders to firebase
 
-            # change the available quantity
+           # change the available quantity
 
-            requiredQuantity = int(transaction['requiredQuantity'])
-            processorKey = transaction['processorKey']
-            productKey = transaction['productKey']
-            temp = database.child("user").child("Processor").child("products").child(processorKey).child(
-                productKey).get()
+           requiredQuantity = int(transaction['requiredQuantity'])
+           processorKey = transaction['processorKey']
+           productKey = transaction['productKey']
+           temp = database.child("user").child("Processor").child("products").child(processorKey).child(
+               productKey).get()
 
-            values = temp.val()
-            avqty = int(values['availableQuantity'])
-            avqty = avqty - requiredQuantity
-            print(avqty)
+           values = temp.val()
+           avqty = int(values['availableQuantity'])
+           avqty = avqty - requiredQuantity
+           print(avqty)
+           return render(request,'user/payment.html',{'renderedFrom':'retailer','productKey':productKey,'processorKey':processorKey,'availableQuantity':avqty,'retailerId':retailerId,
+                                                      'productName':request.POST.get('productName'),
+                                                      'requiredQuantity':int(request.POST.get('requiredQuantity')),
+                                                      'Price':int(request.POST.get('Price')),
+                                                      'timestamp': datetime.now().strftime("%d-%b-%Y (%H:%M:%S.%f)"),
+                                                      'lotKey': request.POST.get('lotKey'),
+                                                      'amountPayable': int(request.POST.get('Price'))*requiredQuantity
+                                                      })
+           # database.child("user").child("Processor").child("products").child(processorKey).child(productKey).update(
+           #     {"availableQuantity": avqty})
 
-            database.child("user").child("Processor").child("products").child(processorKey).child(productKey).update(
-                {"availableQuantity": avqty})
-    data = database.child("user").child("Processor").child('products').get()
-    for entry in data.each():
-        processor = {'processorKey': entry.key()}
-        product = entry.val()
+       if "reportAddButton" in request.POST:
+           print('report is being addedd')
+           retailerAddress = database.child('user').child('Retailer').child(retailerId).get().val()['address']
+           print(retailerAddress)
+           remarks = request.POST.get('processorRemarksOnPurchasedProducts')
+           manufacturedDates = request.POST.get('receivedShipments')
 
-        for key, value in product.items():
-            dict = {"productKey": key}
-            details = value
-            details.update(dict)
-            details.update(processor)
-            if value['availableQuantity'] <= 0:
-                continue
-            productDetails.append(details)
-    print(productDetails)
+           processorKey = request.POST.get('processorAddress')
+           productKey = request.POST.get('productKey')
+           # store productKey as product name in remix addRetailerReport
 
-    # display confirmed orders
-    temp = database.child("user").child("Retailer").child("Confirmed Processor Orders").child(retailerId).get()
-    orderDetails = []
-    print("TEMP-------------------", temp.val())
-    for x in temp.each():
+           lotKey = request.POST.get('lotKey')
+           batchNumber = request.POST.get('batchNumber')
+           processorAddress = database.child('user').child('Processor').child(processorKey).get().val()['address']
+           temp = database.child("user").child("Retailer").child("Confirmed Processor Orders").child(retailerId).child(processorKey)\
+               .child(batchNumber).get()
+           database.child("user").child("Retailer").child("Confirmed Processor Orders").child(retailerId).child(
+               processorKey) \
+               .child(batchNumber).update({"reportAdded":1})
+           # print(temp.val())
+           print(batchNumber)
+           print('----------------------------------------')
+           farmerKey = database.child('user').child('Processor').child('Confirmed Farmer Orders').child(processorKey)\
+           .child(lotKey).get().val()['farmerKey']
+           print(farmerKey)
+           farmerAddress = database.child('user').child('Farmer').child(farmerKey).get().val()['address']
+           print(farmerAddress)
+           print('farmerkeyyyyyyyyyyyyyyyyyyyyyyyy')
 
-        print(x)
-        for key, item in x.val().items():
-            orderDetails.append(item)
+           # check if add hua kya
+           tx_hash = contract.functions.BatchtoLot(batchNumber,lotKey).transact()
+           tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
+           print(tx_receipt)
+           tx_hash = contract.functions.addRetailerReport(retailerAddress,processorAddress, farmerAddress,
+                                                           remarks,'tomato','ketchup',manufacturedDates,12,
+                                                           batchNumber).transact()
+           tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
+           print(tx_receipt)
 
-    # Broadcast for retailer
-    processorKeys = []
-    transactionDetails = []
-    data = database.child("user").child("Retailer").child("Confirmed Processor Orders").child(retailerId).get()
-    details = {}
-    retailerKey = {'retailerKey': retailerId}
-    for entry in data.each():
-        processorKey = {'processorKey': entry.key()}
-        processorKeys.append(entry.key())
-        product = entry.val()
-        print(product)
-        print("23r768trqwd6tet1tw3etqt12yityiet12378t")
-        for key, value in product.items():
-            transactionKeys = {'transactionKey': key}
-            details.update(transactionKeys)
-            details.update(processorKey)
-            details.update(value)
-            details.update(retailerKey)
-            transactionDetails.append(details)
-    print("--------------------------")
-    print(transactionDetails)
-    print("--------------------------")
-    if request.method == "POST":
-        if "broadcast" in request.POST:
-            transactionKey = request.POST['dropdown2']
-            data = database.child("user").child("Retailer").child("Confirmed Processor Orders").child(retailerId).child(
-                request.POST['dropdown1']).child(transactionKey).get()
-            item = {
-                # 'processorKey': request.POST['dropdown1'],
-                'transactionKey': request.POST['dropdown2'],
-                'totalQuantity': int(request.POST.get('quantity')),
-                'Price': int(request.POST.get('Price')),
-                'timestamp': datetime.now().strftime("%d-%b-%Y (%H:%M:%S.%f)"),
-                'availableQuantity': int(request.POST.get('quantity')),
-                'productName': data.val()['productName']
-            }
-            database.child("user").child("Retailer").child('products').child(retailerId).child(
-                request.POST['dropdown1']).push(item)
 
-    return render(request, 'user/retailer.html',
-                  {'data': productDetails, 'orderDetails': orderDetails,
-                   'transactionDetails': transactionDetails, 'processorKeys': processorKeys})
+
+
+   data = database.child("user").child("Processor").child('products').get()
+   for entry in data.each():
+       processor = {'processorKey': entry.key()}
+       product = entry.val()
+
+       for key, value in product.items():
+           dict = {"productKey": key}
+           details = value
+           details.update(dict)
+           details.update(processor)
+           if value['availableQuantity'] <= 0:
+               continue
+           productDetails.append(details)
+   print(productDetails)
+   reportPendingOrders = []
+   reportAddedOrders = []
+   # display confirmed orders
+   temp=database.child("user").child("Retailer").child("Confirmed Processor Orders").child(retailerId).get()
+   orderDetails=[]
+   print("TEMP-------------------",temp.val())
+   if temp.each() != None:
+       for x in temp.each():
+           print(x.key())
+           for key,item in x.val().items():
+               orderDetails.append(item)
+               print('itemmmmmmmmmmmmm')
+               if item['reportAdded'] == 0:
+                   tempo = item
+                   tempo.update({'processorKey':x.key(),'batchNumber':key})
+                   reportPendingOrders.append(tempo)
+               elif item['reportAdded'] == 1:
+                   tempo = item
+                   tempo.update({'processorKey':x.key(),'batchNumber':key})
+                   reportAddedOrders.append(tempo)
+               print('itemmmmmmmmmmmmm')
+
+   # Broadcast for retailer
+   processorKeys = []
+   transactionDetails = []
+   data = database.child("user").child("Retailer").child("Confirmed Processor Orders").child(retailerId).get()
+   details = {}
+   retailerKey = {'retailerKey' : retailerId}
+   if data.each() != None:
+       for entry in data.each():
+           processorKey = {'processorKey': entry.key()}
+           processorKeys.append(entry.key())
+           product = entry.val()
+           print(product)
+           print("23r768trqwd6tet1tw3etqt12yityiet12378t")
+           for key,value in product.items():
+               transactionKeys = {'transactionKey' : key}
+               details.update(transactionKeys)
+               details.update(processorKey)
+               details.update(value)
+               details.update(retailerKey)
+               transactionDetails.append(details)
+   print("--------------------------")
+   print(transactionDetails)
+   print("--------------------------")
+   if request.method == "POST":
+       if "broadcast" in request.POST:
+           transactionKey = request.POST['dropdown2']
+           data = database.child("user").child("Retailer").child("Confirmed Processor Orders").child(retailerId).child(request.POST['dropdown1']).child(transactionKey).get()
+           item = {
+               # 'processorKey': request.POST['dropdown1'],
+               'transactionKey': request.POST['dropdown2'],
+               'totalQuantity': int(request.POST.get('quantity')),
+               'Price': int(request.POST.get('Price')),
+               'timestamp': datetime.now().strftime("%d-%b-%Y (%H:%M:%S.%f)"),
+               'availableQuantity': int(request.POST.get('quantity')),
+               'productName' : data.val()['productName']
+           }
+           database.child("user").child("Retailer").child('products').child(retailerId).child(request.POST['dropdown1']).push(item)
+
+   print("111111111111111",reportAddedOrders)
+   print("22222222222222",reportPendingOrders)
+   return render(request , 'user/retailer.html' ,
+                 {'data' : productDetails, 'orderDetails':orderDetails ,
+                   'transactionDetails' : transactionDetails , 'processorKeys': processorKeys,
+                   'reportPendingOrders':reportPendingOrders, 'reportAddedOrders':reportAddedOrders
+                  })
+
 
 
 def customer(request):
     customerId = request.session['uid']
+    checkerId = '0zGbx6o6oiWIqqABxfy5Qxo07kh2'
+    if request.method == "POST":
+        retailerAddress = database.child("user").child("Retailer").child(request.POST.get('retailerKey')).get()
+        processorAddress = database.child("user").child("Processor").child(request.POST.get('processorKey')).get()
+        retailerAddress = retailerAddress.val()['address']
+        processorAddress = processorAddress.val()['address']
+        transactionKey = request.POST.get('transactionKey')
+        print('ddddddddddddddddddddd',transactionKey)
+        productKey = database.child("user").child("Retailer").child("Confirmed Processor Orders").child(request.POST.get('retailerKey')).\
+                    child(request.POST.get('processorKey')).child(transactionKey).get()
+        lotKey = productKey.val()['lotKey']
+        resultData = database.child("user").child("Quality Checker").child(checkerId).child("check").get()
+        farmerKey = ''
+        for key,data in resultData.val().items():
+            print('dataaa',data)
+            print('transactionKeyyyyyyyyy',transactionKey)
+            if data['interestKey'] == lotKey:
+                farmerKey = data['farmerKey']
+                break
+        print(farmerKey)
+        farmerAddress = database.child("user").child("Farmer").child(farmerKey).get()
+        farmerAddress = farmerAddress.val()['address']
+
+
+
+        print(contract.functions.getRetailerReport(retailerAddress,transactionKey).call())
+        print(contract.functions.getProcessorReport(processorAddress,farmerAddress,lotKey).call())
+        print(contract.functions.getQualityReport(farmerAddress,lotKey).call())
+        # processorKey = request.POST.get('processorKey')
+        # retailerKey = request.POST.get('processorKey')
+        # processorKey = request.POST.get('processorKey')
     # data = database.child("user").child("Retailer").child("Confirmed Processor Orders").get()
     data = database.child("user").child("Retailer").child("products").get()
     print(data.val())
-    print("------------------------------------")
+
     productList = []
-    details = {}
+
     for retailerKeys, value in data.val().items():
         retailerKey = {'retailerKey': retailerKeys}
         retailerName = database.child("user").child("Retailer").child(retailerKeys).get().val()['name']
@@ -677,14 +823,19 @@ def customer(request):
         for processorKey, data in value.items():
             processorKeys = {'processorKey': processorKey}
             for transactionKey, transactionsData in data.items():
-                transactionKeys = {'transactionKey': transactionKey}
+                print(":::::::::::",transactionsData)
+                # transactionKeys = {'transactionKey': transactionKey}
+                details = {}
                 details.update(transactionsData)
-                details.update(transactionKeys)
+                # details.update(transactionKeys)
                 details.update(processorKeys)
                 details.update(retailerKey)
                 details.update(name)
+
                 productList.append(details)
-    print(productList)
+                print("ttttttttttttttt",productList)
+
+    print("-----pppppppppppppppppppppppp--------",productList)
     return render(request, 'user/customer.html', {'productList': productList})
 
 
@@ -701,8 +852,9 @@ def getFarmerYields(farmerId, detailed=0):
     data = database.child('user').child('Farmer').child('yields').child(farmerId).get()
     print('Inside Function')
     yieldIds = []
-    for dat in data.each():
-        yieldIds.append(dat.key())
+    if data is not None:
+        for dat in data.each():
+            yieldIds.append(dat.key())
 
     return yieldIds
 

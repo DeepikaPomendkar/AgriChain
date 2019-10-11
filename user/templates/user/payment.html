@@ -1,4 +1,3 @@
-
 <style>
 
 /************* GENERIC  *****************/
@@ -13,7 +12,7 @@ img {width:100%;}
 /****************** Navigation **************/
 .navbar-toggler {border-color: #dd0000;}
 .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(221, 0, 0, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(221, 0, 0, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 /**************** Banner Slider Carousel **************/
 .carousel-inner img {width: 100%;}
@@ -24,17 +23,17 @@ img {width:100%;}
 /*********** TABS *******/
 .nav-tabs { border-bottom: 1px solid #ccc; }
 .nav-tabs .nav-link.active {
-    border-bottom: 1px solid #dd0000;
-    border-radius:0px;
+   border-bottom: 1px solid #dd0000;
+   border-radius:0px;
 }
 /**************** Social ICONS ***************/
 
 .social-icons{margin: 0;padding: 0; font-size : 8px;}
 .social {margin:7px 7px 7px 0px;}
 #social-fb:hover {color: #3B5998;transition:all .25s;}
- #social-tw:hover {color: #4099FF;transition:all .25s;}
- #social-gp:hover {color: #d34836;transition:all .25s;}
- #social-em:hover {color: #f39c12;transition:all .25s;}
+#social-tw:hover {color: #4099FF;transition:all .25s;}
+#social-gp:hover {color: #d34836;transition:all .25s;}
+#social-em:hover {color: #f39c12;transition:all .25s;}
 
 </style>
 
@@ -47,27 +46,35 @@ img {width:100%;}
 
 <div class="top ">
 <div class="container">
-	<div class="row">
+  <div class="row">
 
-	</div>
+  </div>
 </div>
 </div>
 
 
 
 <form method="POST" action="{% url 'payments' %}">
-    {% csrf_token %}
-    <br>
-    <br>
-    <br>
-    <p>{{amountPayable}}</p>
-    <input type="text" name = "selfAddress" placeholder="Self Public Address"><br>
-    <input type="hidden" name = "amountPayable" value="{{amountPayable}}"><br>
-    <input type="hidden" name = "renderedFrom" value="{{renderedFrom}}"><br>
-    <input type="hidden" name = "lotNumber" value="{{lotNumber}}"><br>
-    <input type="hidden" name = "processorKey" value="{{processorKey}}"><br>
-    <input type="password" name="selfPrivateKey" placeholder="Self Private Address"><br>
-    <input type="text" name="receiverAddress" placeholder="Receiver Address"><br>
-    <button type="submit">Pay!!</button>
+   {% csrf_token %}
+   <br>
+   <br>
+   <br>
+   <p>{{amountPayable}}</p>
+   <input type="text" name = "selfAddress" placeholder="Self Public Address"><br>
+   <input type="hidden" name = "amountPayable" value="{{amountPayable}}"><br>
+   <input type="hidden" name = "renderedFrom" value="{{renderedFrom}}"><br>
+   <input type="hidden" name = "lotNumber" value="{{lotNumber}}"><br>
+   <input type="hidden" name = "processorKey" value="{{processorKey}}"><br>
+   <input type="hidden" name = "productKey" value="{{productKey}}"><br>
+   <input type="hidden" name = "availableQuantity" value="{{availableQuantity}}"><br>
+   <input type="hidden" name = "retailerId" value="{{retailerId}}"><br>
+   <input type="hidden" name = "productName" value="{{productName}}"><br>
+   <input type="hidden" name = "requiredQuantity" value="{{requiredQuantity}}"><br>
+   <input type="hidden" name = "Price" value="{{Price}}"><br>
+   <input type="hidden" name = "lotKey" value="{{lotKey}}"><br>
+   <input type="password" name="selfPrivateKey" placeholder="Self Private Address"><br>
+   <input type="text" name="receiverAddress" placeholder="Receiver Address"><br>
+   <button type="submit">Pay!!</button>
 
 </form>
+
