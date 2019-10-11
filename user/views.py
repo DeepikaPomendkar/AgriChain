@@ -39,6 +39,9 @@ def farmer(request):
     farmerName = data.val()['name']
     if request.method == 'POST':
         if "broadcast" in request.POST:
+            print("----------------------------MPASSDLP")
+            print(request.POST.get('latitude'))
+            print(request.POST.get('longitude'))
             temp = {
                 'farmerName' : farmerName ,
                 'cropName' : request.POST.get('cropName'),
@@ -46,10 +49,12 @@ def farmer(request):
                 'expectedPrice' : int(request.POST.get('expectedPrice')),
                 'timestamp': datetime.now().strftime("%d-%b-%Y (%H:%M:%S.%f)"),
                 'availableQuantity' : int(request.POST.get('quantity')),
+                'latitude' : 72,
+                'longitude' : 23
             }
             database.child("user").child("Farmer").child('yields').child(sess).push(temp)
         if "insurance" in request.POST:
-                print("insure")
+                #print("insure")
 
                 temp ={
                     'processorKey': request.POST.get('processorKey'),
@@ -57,16 +62,16 @@ def farmer(request):
                     'interestKey':request.POST.get('selfKey'),
                     'checked':0,
                 }
-                print('check checkedddddddddddddddddddd')
-                print(temp)
+                #print('check checkedddddddddddddddddddd')
+                #print(temp)
 
 
                 # To reduce on request to insurance
                 fetchLotNumber = database.child("user").child("Processor").child("interests").child(request.POST.get('processorKey')).\
                     child(request.POST.get('selfKey')).get()
-                print(fetchLotNumber)
+               # print(fetchLotNumber)
                 fetchLotNumberValue = fetchLotNumber.val()['farmerLotKey']
-                print(fetchLotNumberValue)
+              #  print(fetchLotNumberValue)
                 requestedQuantity = fetchLotNumber.val()['quantityRequested']
                 toReduceInfo = database.child("user").child("Farmer").child("yields").child(sess).child(fetchLotNumberValue).get()
                 toReducInfo = toReduceInfo.val()
@@ -80,20 +85,20 @@ def farmer(request):
             processorKey = request.POST.get('processorKey')
             interestKey = request.POST.get('selfKey')
             reject = database.child("user").child("Processor").child("interests").child(processorKey).child(interestKey).get().val()
-            reject['rejected'] = 1
-            print("-----------------UPDATE REJECTED------------------")
-            print(reject)
+            reject['rejected'] = "1"
+#            print("-----------------UPDATE REJECTED------------------")
+ #           print(reject)
             database.child("user").child("Processor").child("interests").child(processorKey).child(interestKey).update(reject)
 
-        if "statusButton" in request.POST:
-            # Check if selected Lot number is correct or not
-
-
-
-            # print(request.POST.get('idSelect'))
-            # print(request.POST.get('lotIdSelect'))
-            print(request.POST)
-            print(request.GET['lotIdSelect'])
+        # if "statusButton" in request.POST:
+        #     # Check if selected Lot number is correct or not
+        #
+        #
+        #
+        #     print(request.POST.get('idSelect'))
+        #     print(request.POST.get('lotIdSelect'))
+        #    print(request.POST)
+        #    print(request.GET['lotIdSelect'])
 
 
     data = database.child("user").child("Farmer").child('yields').child(sess).get()
@@ -109,14 +114,14 @@ def farmer(request):
         value = check.val()
         interestKey = value['interestKey']
         ordersAlreadyForInspection.append(interestKey)
-    print('heyyyyyyy')
-    print(ordersAlreadyForInspection)
+    #print('heyyyyyyy')
+ #   print(ordersAlreadyForInspection)
     resultData = database.child("user").child("Processor").child('interests').get()
     for entry in resultData.each():
         value = entry.val()
         for key, values in value.items():
-            print('keyyyyyyy')
-            print(key)
+  #          print('keyyyyyyy')
+   #         print(key)
             if key in ordersAlreadyForInspection:
                 continue
             if values['farmerKey'] == sess:
@@ -124,17 +129,17 @@ def farmer(request):
                 dict1 = {'selfKey': key}
                 proname = database.child("user").child("Processor").child(entry.key()).get().val()['name']
                 proName = {'processorName': proname}
-                print("--------------------------------------REJECT STaatus")
-                if values['rejected'] == 0:
+    #            print("--------------------------------------REJECT STaatus")
+                if values['rejected'] == "0":
                     val = values
                     val.update(dict)
                     val.update(dict1)
                     val.update(proName)
-                    print("ANDAR AAYAYAYAYAYAYAY")
-                    print(val)
+                    # print("ANDAR AAYAYAYAYAYAYAY")
+                    # print(val)
                     results.append(val)
-    print("--------------------Processor broadcasts----------------")
-    print(results)
+    # print("--------------------Processor broadcasts----------------")
+    # print(results)
     # transaction from processor
     # transactionHistoryValues = []
     # dataForTransaction = database.child('user').child('Processor').child('Confirmed Farmer Orders').get()
@@ -368,7 +373,7 @@ def processor(request):
     print("--------------------INTEREST DATAAAA-------------")
     # print(interestData)
     for interestKey , jsonValue in interestData.items():
-        if jsonValue['rejected'] == 1:
+        if jsonValue['rejected'] == "1":
             rejectedInterests.append(jsonValue)
         else:
             processorInterests.append(jsonValue)

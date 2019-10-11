@@ -47,7 +47,7 @@
                  <!--<p><input type="submit" value="Sign in" /></p>-->
                    <select name="dropdown" style="margin-top: 10px;border-radius: 25px;width:375px">
                        {% for lotKey in lots %}
-                           <option value="{{lotKey.lot}}">{{lotKey.lot}},{{lotKey.cropName}}</option>
+                           <option value="{{lotKey.lot}}">Lot:{{lotKey.lot}},Crop:{{lotKey.cropName}}</option>
                        {% endfor %}
                    </select>
 

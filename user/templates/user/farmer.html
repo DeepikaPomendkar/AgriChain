@@ -40,8 +40,11 @@
               <input type="text" readonly name = "farmerName" placeholder="Farmer Name:{{farmerName}}" style="margin-top: 10px;border-radius: 25px;width:375px"><br>
               <input type="text" name = "cropName" placeholder="Crop Name" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
               <input type="text" name = "quantity" placeholder="Quantity" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
-              <input type="text" name = "expectedPrice" placeholder="Expected Price" style="margin-top: 10px;border-radius: 25px;width:375px""/><br>
+              <input type="text" name = "expectedPrice" placeholder="Expected Price" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
+              <input type="hidden" id="lat" name="latitude" value="123">
+              <input type="hidden" id="lon" name ="longitude" value="34">
               <button type="submit" class="btn btn-primary" name="broadcast" style="margin-top: 10px;border-radius: 25px;width:200px">Submit Details!!</button>
+
           </form>
         </div>
         <div class="container" id="item-2" style="text-align: center;margin-top: 50px" >
@@ -55,7 +58,7 @@
                           <div class="card-block" >
                             <h5><p class="card-text"><u>Crop Name:</u> {{dat.cropName}}</p>
                             <p class="card-text"><u>Quantity :</u> {{dat.quantity}}</p>
-                            <p class="card-text"><u>Expected Price :</u>{{dat.expectedPrice}}</p></h5>
+                            <p class="card-text"><u>Expected Price :</u>{{dat.expectedPrice}}Rs</p></h5>
                           </div>
 
                 </div>
@@ -203,7 +206,7 @@ ol.progtrckr li.progtrckr-todo:before {
     </div>
 </div>
             </div>
-
+   </div>
 {% endblock content %}
 
 
