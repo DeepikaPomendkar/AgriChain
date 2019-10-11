@@ -4,6 +4,6 @@ from predict import views
 
 urlpatterns = [
     path('',views.home,name='home'),
-    path('analyse/',views.analyse,name='analyse'),
-    path('analyse/predict',views.predict,name='predict'),
+    path('analyzeArea/',views.analyse,name='analyseArea'),
+    path('analyzeArea/predict',views.predict,name='predict'),
 ]

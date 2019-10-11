@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
     $("#bajra").click(function(){
-        alert("button-bajra clicked");
             $.ajax({
                 type: "GET",
                 url: "/analysis/data",
@@ -25,7 +24,6 @@ $(document).ready(function(){
     });
 
     $("#barley").click(function(){
-        alert("button-barley clicked");
         $.ajax({
                 type: "GET",
                 url: "/analysis/data",
@@ -49,8 +47,7 @@ $(document).ready(function(){
     });
 
     $("#jowar").click(function(){
-        alert("button-jowar clicked");
-        $.ajax({
+          $.ajax({
                 type: "GET",
                 url: "/analysis/data",
                 data: {
@@ -73,7 +70,6 @@ $(document).ready(function(){
     });
 
     $("#maize").click(function(){
-        alert("button-maize clicked");
         $.ajax({
                 type: "GET",
                 url: "/analysis/data",
@@ -97,7 +93,6 @@ $(document).ready(function(){
     });
 
     $("#wheat").click(function(){
-        alert("button-wheat clicked");
         $.ajax({
                 type: "GET",
                 url: "/analysis/data",
