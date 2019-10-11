@@ -76,6 +76,15 @@ def farmer(request):
 
                 database.child("user").child("Quality Checker").child("0zGbx6o6oiWIqqABxfy5Qxo07kh2").child("check").push(temp)
 
+        if "reject" in request.POST:
+            processorKey = request.POST.get('processorKey')
+            interestKey = request.POST.get('selfKey')
+            reject = database.child("user").child("Processor").child("interests").child(processorKey).child(interestKey).get().val()
+            reject['rejected'] = 1
+            print("-----------------UPDATE REJECTED------------------")
+            print(reject)
+            database.child("user").child("Processor").child("interests").child(processorKey).child(interestKey).update(reject)
+
         if "statusButton" in request.POST:
             # Check if selected Lot number is correct or not
 
@@ -114,14 +123,18 @@ def farmer(request):
                 dict = {'processorKey': entry.key()}
                 dict1 = {'selfKey': key}
                 proname = database.child("user").child("Processor").child(entry.key()).get().val()['name']
-                proName={'processorName':proname}
-                # print(key)
-                val = values
-                val.update(dict)
-                val.update(dict1)
-                val.update(proName)
-                results.append(val)
-    # print(results)
+                proName = {'processorName': proname}
+                print("--------------------------------------REJECT STaatus")
+                if values['rejected'] == 0:
+                    val = values
+                    val.update(dict)
+                    val.update(dict1)
+                    val.update(proName)
+                    print("ANDAR AAYAYAYAYAYAYAY")
+                    print(val)
+                    results.append(val)
+    print("--------------------Processor broadcasts----------------")
+    print(results)
     # transaction from processor
     # transactionHistoryValues = []
     # dataForTransaction = database.child('user').child('Processor').child('Confirmed Farmer Orders').get()
@@ -331,18 +344,35 @@ def processor(request):
         if transactionValue['paymentStatus'] == 1:
             continue
         pendingFarmerTransactions.append(temporaryData)
+
     for entry in data.each():
         dict = {'farmerKey': entry.key()}
+        farmerName = database.child("user").child("Farmer").child(entry.key()).get().val()['name']
         hey = entry.val()
         for key, values in hey.items():
             val = values
             dict1 = {'farmerLotKey': key}
+            dict2={'farmerName':farmerName}
             #print(val)
             val.update(dict)
             val.update(dict1)
+            val.update(dict2)
             #print(val)
             if(val['quantity']>0 and val['availableQuantity']>0):
                 temp.append(val)
+
+    #interests of processor
+    interestData = database.child("user").child("Processor").child("interests").child(sess).get().val()
+    processorInterests = []
+    rejectedInterests = []
+    print("--------------------INTEREST DATAAAA-------------")
+    # print(interestData)
+    for interestKey , jsonValue in interestData.items():
+        if jsonValue['rejected'] == 1:
+            rejectedInterests.append(jsonValue)
+        else:
+            processorInterests.append(jsonValue)
+
     # Transaction History Orders Data
     transactionHistoryValues = []
     dataForTransaction = database.child('user').child('Processor').child('Confirmed Farmer Orders').child(sess).get()
@@ -354,10 +384,19 @@ def processor(request):
 
            
     data = database.child("user").child("Processor").child("Confirmed Farmer Orders").child(processorId).get()
-    
-    lots =[]
+
+    lots = []
     for lotKey in data.each():
-        lots.append(lotKey.key())
+        value = lotKey.val()
+
+        interestKey = value['interestKey']
+        data = database.child("user").child("Processor").child("interests").child(processorId).child(interestKey).get()
+        cropName = data.val()['cropName']
+        dict1 = {'lot': lotKey.key()}
+        dict2 = {'cropName': cropName}
+        dict1.update(dict2)
+        lots.append(dict1)
+
     #print(lots)
     if request.method == "POST":
         if "broadcast" in request.POST:
@@ -372,18 +411,23 @@ def processor(request):
             database.child("user").child("Processor").child('products').child(processorId).push(product)
 
     # display orders done with retailer
-    temp1=database.child("user").child("Retailer").child('Confirmed Processor Orders').get()
-    RorderDetails=[]
+    temp1 = database.child("user").child("Retailer").child('Confirmed Processor Orders').get()
+    RorderDetails = []
 
     for ret in temp1.each():
-        
+        retKey = ret.key()
+        retName = database.child("user").child("Retailer").child(retKey).get().val()['name']
+        dict = {'retName': retName}
+        print("name.....................", retName)
         for key, item in ret.val().items():
-            if key==processorId:
-            
-                for key,item1 in item.items():
-                    dict1={'processorKey':key}
+            if key == processorId:
+
+                for key, item1 in item.items():
+                    dict1 = {'processorKey': key}
                     dict1.update(item1)
+                    dict1.update(dict)
                     RorderDetails.append(dict1)
+
     #print("-------------------------------------",transactionHistoryValues)
     #his broadcasts 
 
@@ -396,7 +440,11 @@ def processor(request):
         broadcastDetails = processorData
         broadcastList.append(broadcastDetails)
     print("---------------",broadcastList)
-    return render(request, 'user/processor.html',{'data':temp,'farmerPaymentData':pendingFarmerTransactions,'reportPaidTransactions':reportPaidTransactions,'transactionHistory':transactionHistoryValues,'lots':lots,'orderDetails':RorderDetails,'broadcastList':broadcastList})
+    return render(request, 'user/processor.html',{'data':temp,'farmerPaymentData':pendingFarmerTransactions,
+                                                  'reportPaidTransactions':reportPaidTransactions,'processorInterests':processorInterests,
+                                                  'rejectedInterests' : rejectedInterests,
+                                                  'transactionHistory':transactionHistoryValues,'lots':lots,
+                                                  'orderDetails':RorderDetails,'broadcastList':broadcastList })
 def signIn(request):
     # if method == 'POST':
 

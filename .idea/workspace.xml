@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e28e5eb2-dd56-47cf-94a5-5147cd08a6f5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/hack.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hack.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/static/javascripts/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/user/static/javascripts/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/templates/user/farmer.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/farmer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/retailer.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/retailer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/templates/user/processor.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/processor.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,7 +62,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570447615053</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="farmer retailer ajax part and views corrected">
+      <created>1570764354890</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1570764354890</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -82,6 +85,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Blockchain Part added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Blockchain Part added" />
+    <MESSAGE value="farmer retailer ajax part and views corrected" />
+    <option name="LAST_COMMIT_MESSAGE" value="farmer retailer ajax part and views corrected" />
   </component>
 </project>

@@ -7,36 +7,37 @@
 
 {% block content %}
 
-<div class="container" style="height:700px;width:90%;margin-top:100px;margin-left:auto;margin-right:auto;background: rgba(255, 255, 255, 0.4);">
+
   <br><br><br><br>
 
 
 
 
-    <div class="row" style="display: block;text-align: center;">
+    <div class="row" style="text-align: center;">
 
-
-      <h3><span ><a id="1" class="show" style="border-left: solid;border-right: solid;cursor: pointer;"> Broadcast </a></span>
-      <span><a id="2" class="show" style="border-right: solid;cursor: pointer;"> Farmer Broadcasts </a></span>
-      <span><a id="3" class="show" style="border-right: solid;cursor: pointer;"> Processor Requests </a></span>
-      <span><a id="5" class="show" style="border-right: solid;cursor: pointer;"> Transactions </a></span>
-      <span><a id="4" class="show" style="border-right: solid;cursor: pointer;"> Lot Status </a></span></h3>
+    <div class="col-md-3">
+      <h3><a id="1" class="show" style="border-left: solid;border-right: solid;cursor: pointer;"> Broadcast </a><br>
+      <a id="2" class="show" style="border-right: solid;cursor: pointer;"> Farmer Broadcasts </a><br>
+      <a id="3" class="show" style="border-right: solid;cursor: pointer;"> Processor Requests </a><br>
+      <a id="5" class="show" style="border-right: solid;cursor: pointer;"> Transactions </a><br>
+      <a id="4" class="show" style="border-right: solid;cursor: pointer;"> Lot Status </a></h3>
 
     </div>
-    <div class="content-wrapper">
+        <div class="col-md-7" style="height:700px;width:90%;margin-left:auto;margin-right:auto;background: rgba(255, 255, 255, 0.4);">
+    <div class="content-wrapper"  style="text-align: center">
 
 
 
-        <div id="item-1" style="text-align: center;margin-top: 50px;">
-          <div class="row" style="display:block;text-align: center">
-            <h4 >Broadcast your Crop details!</h4>
+        <div id="item-1" style="margin-top: 50px;">
+          <div class="row" style="text-align: center">
+            <h4 style="text-align: center">Broadcast your Crop details!</h4>
           </div>
           <form action="{% url 'farmer' %}" method="POST" id="form" name="form">
             {% csrf_token %}
           <!--<p><input type="text" placeholder="username"/></p>-->
           <!--<p><input type="password" placeholder="password" /></p>-->
           <!--<p><input type="submit" value="Sign in" /></p>-->
-              <input type="text" readonly name = "farmerName" placeholder="{{farmerName}}" style="margin-top: 10px;border-radius: 25px;width:375px"><br>
+              <input type="text" readonly name = "farmerName" placeholder="Farmer Name:{{farmerName}}" style="margin-top: 10px;border-radius: 25px;width:375px"><br>
               <input type="text" name = "cropName" placeholder="Crop Name" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
               <input type="text" name = "quantity" placeholder="Quantity" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
               <input type="text" name = "expectedPrice" placeholder="Expected Price" style="margin-top: 10px;border-radius: 25px;width:375px""/><br>
@@ -44,7 +45,7 @@
           </form>
         </div>
         <div class="container" id="item-2" style="text-align: center;margin-top: 50px" >
-          <div class="row"  style="display:block;text-align: center">
+          <div class="row"  style="text-align: center">
             <h4>Your Broadcasts.</h4>
           </div>
           <div class="row example-1 scrollbar-deep-purple scrollbar-light-blue "   >
@@ -67,41 +68,40 @@
 
 
         <div class="container" id="item-3" style="text-align: center;margin-top: 50px">
-          <div class="row"  style="display:block;text-align: center">
+          <div class="row"  style="text-align: center">
             <h4>Your Processor Requests</h4>
           </div>
           <div class="row example-1 scrollbar-deep-purple scrollbar-light-blue "  >
 
 
             {% for dat in results %}
-            <div class="col-md-4" style="margin-top: 10px">
-              <div class="card  ">
-                  <!--<p>Hey this is Request no 1</p>-->
-                  <form action="{% url 'farmer' %}" method="POST">
-                      {% csrf_token %}
-                      <div class="card-block">
+                <div class="col-md-4" style="margin-top: 10px">
+                  <div class="card  ">
+                      <!--<p>Hey this is Request no 1</p>-->
+                      <form action="{% url 'farmer' %}" method="POST">
+                          {% csrf_token %}
+                          <div class="card-block">
 
-                          <h6><p class="card-text">Crop Name:{{dat.cropName}}</p>
-                          <p class="card-text">Processor Name:{{dat.processorName}}</p>
-                          <p class="card-text">Requested Quantity:{{dat.quantityRequested}}</p>
-                          <p class="card-text">Quoted Price:{{dat.quotedPrice}}</p></h6>
+                              <h6><p class="card-text">Crop Name:{{dat.cropName}}</p>
+                              <p class="card-text">Processor Name:{{dat.processorName}}</p>
+                              <p class="card-text">Requested Quantity:{{dat.quantityRequested}}</p>
+                              <p class="card-text">Quoted Price:{{dat.quotedPrice}}</p></h6>
 
 
-                          <input type="hidden" name="cropName" value="{{dat.cropName}}">
-                          <input type="hidden" name="farmerKey" value="{{dat.farmerKey}}">
-                          <input type="hidden" name="farmerName" value="{{farmerName}}">
-                          <input type="hidden" name="quantity" value="{{dat.quantity}}">
-                          <input type="hidden" name="expectedPrice" value="{{dat.expectedPrice}}">
-                          <input type="hidden" name="processorKey" value="{{dat.processorKey}}">
-                          <input type="hidden" name="selfKey" value="{{dat.selfKey}}">
-                      <button type="submit" name="insurance" value="insurance" class="btn btn-warning" >Send To Insure</button>
-                      <!--<button type="submit" name="acceptButton" value="accept" class="btn btn-warning" >Accept</button>-->
-                          <!--<a href="{% url 'processor' %}" class="btn btn-primary stretched-link">Accept</a>-->
-                      <!--<button type="submit" name="rejectButton" value="reject" class="btn btn-warning" >Deny</button>-->
-                      </div>
-                  </form>
-              </div>
-            </div>
+                              <input type="hidden" name="cropName" value="{{dat.cropName}}">
+                              <input type="hidden" name="farmerKey" value="{{dat.farmerKey}}">
+                              <input type="hidden" name="farmerName" value="{{farmerName}}">
+                              <input type="hidden" name="quantity" value="{{dat.quantity}}">
+                              <input type="hidden" name="expectedPrice" value="{{dat.expectedPrice}}">
+                              <input type="hidden" name="processorKey" value="{{dat.processorKey}}">
+                              <input type="hidden" name="selfKey" value="{{dat.selfKey}}">
+                              <button type="submit" name="insurance" value="insurance" class="btn btn-warning" >Send To Insure</button>
+                              <button type="submit" name="reject" value="reject" class="btn btn-warning" >Reject</button>
+                          </div>
+                      </form>
+                  </div>
+                </div>
+
             {% endfor %}
           </div>
         </div>
@@ -202,6 +202,8 @@ ol.progtrckr li.progtrckr-todo:before {
 
     </div>
 </div>
+            </div>
+
 {% endblock content %}
 
 
