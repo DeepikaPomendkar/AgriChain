@@ -168,7 +168,7 @@ def farmer(request):
 
     #getFarmerYields(sess)
     # print("results:", results)
-    return render(request, 'user/farmer.html', {'data': temp1, 'results': results, 'farmerName': farmerName,'transactionHistoryValues':transactionHistoryValues})
+    return render(request, 'user/farmer.html', {'data': temp1, 'results': results, 'farmerName': farmerName,'transactionHistoryValues':transactionHistoryValues,'stake':"farmer"})
 
 
 def qualityChecker(request):
@@ -807,6 +807,17 @@ def customer(request):
         print(contract.functions.getRetailerReport(retailerAddress,transactionKey).call())
         print(contract.functions.getProcessorReport(processorAddress,farmerAddress,lotKey).call())
         print(contract.functions.getQualityReport(farmerAddress,lotKey).call())
+
+        context={
+            'retailerReport':contract.functions.getRetailerReport(retailerAddress,transactionKey).call(),
+            'processorReport':contract.functions.getProcessorReport(processorAddress,farmerAddress,lotKey).call(),
+            'qualityReport':contract.functions.getQualityReport(farmerAddress,lotKey).call(),
+
+
+
+        }
+        return render(request, "user/reports.html", context)
+
         # processorKey = request.POST.get('processorKey')
         # retailerKey = request.POST.get('processorKey')
         # processorKey = request.POST.get('processorKey')
@@ -914,4 +925,26 @@ def getData(request):
             processorKey).child(transactionKey).get()
 
         return JsonResponse({'key': data.val()['requiredQuantity']}, safe=False)
+
+    elif post_id == 'statusCheck':
+        yieldId = request.GET.get('selectedValue')
+        lotId = request.GET.get('lotIdSelected')
+        data = database.child('user').child('Quality Checker').child('0zGbx6o6oiWIqqABxfy5Qxo07kh2').child('check').get()
+        for key,value in data.val().items():
+            if value['interestKey'] == lotId:
+                checkedStatus = value['checked']
+                if checkedStatus == 1:
+                    temp = {}
+                    processorKey = value['processorKey']
+                    farmerKey = value['farmerKey']
+                    temp['insuredStatus'] = 1
+                    tempData = database.child('user').child('Processor').child('Confirmed Farmer Orders').child(processorKey).child(lotId).get()
+                    temp['paymentStatus'] = tempData.val()['paymentStatus']
+                    temp['processorReportStatus'] = tempData.val()['reportStatus']
+                    return JsonResponse(temp, safe=False)
+                else:
+                    temp = {'insuredStatus':0,'paymentStatus':0,'processorReportStatus':0}
+                    return JsonResponse(temp,safe=False)
+        print(yieldId)
+        print(lotId)
 

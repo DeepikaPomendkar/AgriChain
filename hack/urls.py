@@ -22,4 +22,5 @@ urlpatterns = [
     path('predict/',include('predict.urls')),
     path('analysis/',include('analysis.urls')),
     path('marker/',include('marker.urls')),
+    path('cropPredict/',include('cropPredict.urls')),
 ]

@@ -6,6 +6,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </head>
 <style type="text/css">
 	body  {
@@ -71,6 +72,9 @@ input[type="text"]::placeholder {
                 /* Firefox, Chrome, Opera */
                 text-align: center;
             }
+<!--#productTracker {-->
+<!--  display: none;-->
+<!--}-->
 </style>
 <script>
   $(function(){
@@ -86,8 +90,51 @@ input[type="text"]::placeholder {
         $allItems1.not($(itemId).toggle()).hide();
     });
 });
+function getStatus(){
+
+    selectedValue = document.getElementById('idSelect').value;
+    lotIdSelected = document.getElementById('lotIdSelect').value;
+    $.ajax({
+                type: "GET",
+                url: "getData/",
+
+                data: {
+                    'post_id':'statusCheck',
+                    'selectedValue': selectedValue,
+                    'lotIdSelected': lotIdSelected
+                },
+                success: function (data) {
+
+                }
+    });
+}
+
+$(document).ready(function () {
+  // Listen to click event on the submit button
+  $('#statusButton').click(function (e) {
+
+    e.preventDefault();
+
+    var selectedValue = $('#idSelect').val();
+    var lotIdSelected = $('#lotIdSelect').val();
 
 
+
+    $.ajax({
+                type: "GET",
+                url: "getData/",
+
+                data: {
+                    'post_id':'statusCheck',
+                    'selectedValue': selectedValue,
+                    'lotIdSelected': lotIdSelected
+                },
+                success: function (data) {
+
+                }
+    });
+  });
+});
 </script>
 
 {% if stake == "processor"  %}
@@ -95,12 +142,13 @@ input[type="text"]::placeholder {
 
 {% else %}
 
+
 	<nav class="navbar navbar-expand-sm  fixed-top "style="opacity: 0.8;width: 100%;margin-bottom: 40px">
 
 {% endif %}
 
 	    <div class="container">
-	      <h2><b><a class="navbar-brand" href="index.html" style="color:black">Agro<span>Chain.</span></a></b></h2>
+	      <h2><b><a class="navbar-brand" href="index.html" style="color:black">Supply<span>Chain.</span></a></b></h2>
 	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu" style="color:black"></span> Menu
 	      </button>
@@ -110,8 +158,11 @@ input[type="text"]::placeholder {
 	          <li class="nav-item"><a href="{% url 'user-home' %}" class="nav-link" style="color:black"><b><span>Home</span></b></a></li>
 	          <li class="nav-item"><a href="#about-section" class="nav-link" style="color:black"><b><span>About</span></b></a></li>
 	          <li class="nav-item"><a href="#about-section" class="nav-link" style="color:black"><b><span>Profile</span></b></a></li>
-
-
+				{% if stake == "farmer" %}
+					<li class="nav-item"><a href="{% url 'home' %}" class="nav-link" style="color:black"><b><span>Crop Predictor </span></b></a></li>
+				<li class="nav-item"><a href="{% url 'new_index' %}" class="nav-link" style="color:black"><b><span>Analyse Crop Yield </span></b></a></li>
+					<li class="nav-item"><a href="{% url 'index' %}" class="nav-link" style="color:black"><b><span>Crop Price Predictor </span></b></a></li>
+				{% endif %}
 
 	        </ul>
 	      </div>

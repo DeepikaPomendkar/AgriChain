@@ -118,6 +118,7 @@ var staticMapUrl = "https://maps.googleapis.com/maps/api/staticmap";
     </div>
      <ul class="nav navbar-nav">
       <li id="nav1"><a href="{% url 'home' %}">Home</a></li>
+         <li id="nav1"><a href="{% url 'farmer' %}">Farmer Home</a></li>
       <!-- <li id="nav2"><a href="/users/logs">Logs</a></li> -->
       <!-- <li id="nav3"><a href="/users/graph">Graphs</a></li>       -->
     </ul>
@@ -139,7 +140,7 @@ var staticMapUrl = "https://maps.googleapis.com/maps/api/staticmap";
         </center>
       </div>
     </div>
-<form action="{% url 'analyse' %}" method="POST">
+<form action="{% url 'analyseArea' %}" method="POST">
     {% csrf_token %}
     <div class="row" style="padding-bottom: 0.5em , margin-left : -30px">
       <div class = "col-md-2">
