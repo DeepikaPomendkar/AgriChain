@@ -154,7 +154,7 @@
                 <div class="col-md-4" style="margin-top: 10px">
                   <div class="card ">
 
-                      <form action="{% url 'processor' %}" method="POST" id="form1">
+                      <form action="{% url 'processor' %}" method="POST" id="form3">
                           {% csrf_token %}
                         <div class="card-block">
 
@@ -195,15 +195,15 @@
                         <div class="col-md-4" style="margin-top: 10px">
                             <div class="card ">
                                 <!--<p>Hey this is Request no 1</p>-->
-                                <form action="{% url 'processor' %}" method="POST" id="form1">
+                                <form action="{% url 'processor' %}" method="POST" id="form5">
                                     {% csrf_token %}
                                     <div class="block">
 
 
-                                        <p>{{dat.farmerKey}}</p>
-                                        <p>{{dat.lotNumber}}</p>
-                                        <p>{{dat.quantity}}</p>
-                                        <p>{{dat.quotedPrice}}</p>
+                                        <p>Farmer Name : {{dat.farmerName}}</p>
+                                        <p>Lot Number:{{dat.lotNumber}}</p>
+                                        <p>quantity:{{dat.quantity}}</p>
+                                        <p>Price:{{dat.quotedPrice}}</p>
                                         <p>{{dat.amountPayable}}</p>
 
                                         <!--Available: <p>{{dat.quantity}}</p>-->
@@ -238,7 +238,7 @@
                                 <div class="card-body">
 
 
-                                    Farmer Key:<p>{{dat.farmerKey}}</p>
+                                    Farmer Name:<p>{{dat.farmerName}}</p>
                                     
                                     Quantity:<p>{{dat.quantity}}</p>
 
@@ -312,7 +312,7 @@
                                 <div class="card-body">
 
 
-                                    Farmer Key:<p>{{dat.farmerKey}}</p>
+                                    Farmer Name:<p>{{dat.farmerName}}</p>
                                     Quoted Price:<p>{{dat.quotedPrice}}</p>
                                     Quantity Requested:<p>{{dat.quantityRequested}}</p>
                                 </div>
@@ -337,7 +337,7 @@
                         <div class="card ">
                         <!--<p>Hey this is Request no 1</p>-->
                                 <div class="card-body">
-                                    Farmer Key:<p>{{dat.farmerKey}}</p>
+                                    Farmer Name:<p>{{dat.farmerName}}</p>
                                     Quoted Price:<p>{{dat.quotedPrice}}</p>
                                     Quantity Requested:<p>{{dat.quantityRequested}}</p>
                                 </div>

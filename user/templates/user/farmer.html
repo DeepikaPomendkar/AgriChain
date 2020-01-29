@@ -22,6 +22,7 @@
       <a id="3" class="show" style="margin-left:20px;cursor: pointer;"> Processor Requests </a><br><br>
       <a id="5" class="show" style="margin-left:20px;cursor: pointer;"> Transactions </a><br><br>
       <a id="4" class="show" style="margin-left:20px;cursor: pointer;"> Lot Status </a></h3>
+      <!--<a id="6" class="show" style="margin-left:20px;cursor: pointer;"> Micro Finance </a></h3>-->
 
     </div>
         <div class="col-md-7" style="text-align: center;height:700px;width:90%;margin-left:auto;margin-right:auto;background: rgba(255, 255, 255, 0.4);">
@@ -33,7 +34,7 @@
               <div class="row" >
                 <h4 style="text-align: center">Broadcast your Crop details!</h4>
               </div>
-              <form action="{% url 'farmer' %}" method="POST" id="form" name="form">
+              <form action="{% url 'farmer' %}" method="POST" id="form5" name="form">
                 {% csrf_token %}
               <!--<p><input type="text" placeholder="username"/></p>-->
               <!--<p><input type="password" placeholder="password" /></p>-->
@@ -109,6 +110,8 @@
                 {% endfor %}
               </div>
             </div>
+
+
 
                 <div id="item-4">
                   Lot Status
@@ -226,7 +229,27 @@
               </div>
             </div>
 
+            <div id="item-6" style="margin-top: 50px;">
+              <div class="row" >
+                <h4 style="text-align: center">Broadcast for Micro-Finance!</h4>
+              </div>
+              <form action="{% url 'farmer' %}" method="POST" id="form" name="form">
+                {% csrf_token %}
+              <!--<p><input type="text" placeholder="username"/></p>-->
+              <!--<p><input type="password" placeholder="password" /></p>-->
+              <!--<p><input type="submit" value="Sign in" /></p>-->
+                  <input type="text" name = "yieldId" placeholder="Yield Id" style="margin-top: 10px;border-radius: 25px;width:375px"><br>
+                  <input type="text" name = "farmerName" placeholder="Farmer Name" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
+                  <input type="text" name = "cropName" placeholder="cropName" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
+                  <input type="text" name = "location" placeholder="Location" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
+                  <input type="text" name = "quantity" placeholder="Quantity" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
+                  <input type="text" name = "price" placeholder="Price" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
+                  <input type="hidden" id="lat" name="latitude" value="123">
+                  <input type="hidden" id="lon" name ="longitude" value="34">
+                  <button type="submit" class="btn btn-primary" name="microFarming" style="margin-top: 10px;border-radius: 25px;width:200px">Submit Details!!</button>
 
+              </form>
+            </div>
 
             </div>
    </div>

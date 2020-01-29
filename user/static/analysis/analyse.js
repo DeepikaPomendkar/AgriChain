@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     $("#bajra").click(function(){
             $.ajax({
                 type: "GET",

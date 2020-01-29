@@ -26,6 +26,8 @@ web3.eth.defaultAccount = web3.eth.accounts[0]
 abi = json.loads('[{"constant":false,"inputs":[{"name":"_batchNumber","type":"string"},{"name":"_lotNumber","type":"string"}],"name":"BatchtoLot","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_processor","type":"address"},{"name":"_farmer","type":"address"},{"name":"_lotNumber","type":"string"},{"name":"_remarks","type":"string"},{"name":"_receivedShipment","type":"string"}],"name":"addProcessorReport","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_retailer","type":"address"},{"name":"_batchNumber","type":"string"}],"name":"getRetailerReport","outputs":[{"name":"_productName","type":"string"},{"name":"_remarks","type":"string"},{"name":"_rawMaterial","type":"string"},{"name":"_manufacturedDate","type":"string"},{"name":"_quantity","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_processor","type":"address"},{"name":"_farmer","type":"address"},{"name":"_lotNumber","type":"string"}],"name":"getProcessorReport","outputs":[{"name":"_remarks","type":"string"},{"name":"_receivedShipment","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_retailer","type":"address"},{"name":"_retailerKey","type":"string"}],"name":"addRetailer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_processor","type":"address"},{"name":"_processorKey","type":"string"}],"name":"addProcessor","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_retailer","type":"address"},{"name":"_processor","type":"address"},{"name":"_farmer","type":"address"},{"name":"_remarks","type":"string"},{"name":"_rawMaterial","type":"string"},{"name":"_productName","type":"string"},{"name":"_manufacturedDate","type":"string"},{"name":"_quantity","type":"int256"},{"name":"_batchNumber","type":"string"}],"name":"addRetailerReport","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_farmer","type":"address"},{"name":"_lotNumber","type":"string"}],"name":"getQualityReport","outputs":[{"name":"_remarks","type":"string"},{"name":"_inspector","type":"address"},{"name":"_sampleSize","type":"int256"},{"name":"_defective","type":"int256"},{"name":"_quantity","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_farmer","type":"address"},{"name":"_farmerKey","type":"string"}],"name":"addFarmer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_farmer","type":"address"},{"name":"_inspector","type":"address"},{"name":"_lotNumber","type":"string"},{"name":"_remarks","type":"string"},{"name":"_sampleSize","type":"int256"},{"name":"_quantity","type":"int256"},{"name":"_defective","type":"int256"}],"name":"addQualityReport","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_inspector","type":"address"},{"name":"_inspectorKey","type":"string"}],"name":"addInspector","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"farmerAddress","type":"address"},{"indexed":false,"name":"farmerKey","type":"string"}],"name":"farmerAddition","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"processorAddress","type":"address"},{"indexed":false,"name":"processorKey","type":"string"}],"name":"processorAddition","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"retailerAddress","type":"address"},{"indexed":false,"name":"retailerKey","type":"string"}],"name":"retailerAddition","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"inspectoAddress","type":"address"},{"indexed":false,"name":"inspectoKey","type":"string"}],"name":"inspectorAddition","type":"event"}]')
 address = web3.toChecksumAddress('0xfb0a215ce2d9748dbac279aed48e918564af9b39')
 
+
+
 contract = web3.eth.contract(address=address, abi=abi)
 
 firebase = pyrebase.initialize_app(firebaseConfig)
@@ -39,9 +41,9 @@ def farmer(request):
     farmerName = data.val()['name']
     if request.method == 'POST':
         if "broadcast" in request.POST:
-            print("----------------------------MPASSDLP")
-            print(request.POST.get('latitude'))
-            print(request.POST.get('longitude'))
+            # print("----------------------------MPASSDLP")
+            # print(request.POST.get('latitude'))
+            # print(request.POST.get('longitude'))
             temp = {
                 'farmerName': farmerName,
                 'cropName': request.POST.get('cropName'),
@@ -53,6 +55,18 @@ def farmer(request):
                 'longitude': 23
             }
             database.child("user").child("Farmer").child('yields').child(sess).push(temp)
+        if "microFarming" in request.POST:
+            print('sssssssssss',request.POST)
+            dataTemp = {
+                'yieldId' : request.POST.get('yieldId'),
+                'farmerName' : request.POST.get('farmerName'),
+                'cropName' : request.POST.get('cropName'),
+                'location' : request.POST.get('location'),
+                'quantity' : request.POST.get('quantity'),
+                'price' : request.POST.get('price'),
+                'sponsorStatus':0,
+            }
+            database.child("user").child("Farmer").child('microFarming').child(sess).child(request.POST.get('yieldId')).set(dataTemp)
         if "insurance" in request.POST:
             # print("insure")
 
@@ -150,12 +164,12 @@ def farmer(request):
     dataForTransaction = database.child('user').child('Processor').child('Confirmed Farmer Orders').get()
     for i in dataForTransaction.each():
         val=i.val()
-        print(val)
+        # print(val)
         for key,value in val.items():
             if value['farmerKey']==sess and value['paymentStatus']==1:
                 temp = value
                 temp.update({'quotedPrice':value['quoted price'],'processorKey':i.key()})
-                print(i.key())
+                # print(i.key())
                 transactionHistoryValues.append(value)
 
 
@@ -186,9 +200,9 @@ def qualityChecker(request):
         sampleSize = int(sampleSize)
         quantity = int(quantity)
         defective = int(defective)
-        print(sampleSize)
+        # print(sampleSize)
         interestKey = request.POST.get('interestKey')
-        print(type(sampleSize))
+        # print(type(sampleSize))
         if "pushButton" in request.POST:
             if inspectorData is not None:
                 inspectorAddress = inspectorData.val()['address']
@@ -252,7 +266,7 @@ def qualityChecker(request):
                         # print("1:::::::", dict1)
                         # print("2:::::::", dict2)
                         dict1.update(dict2)
-                        print(dict1)
+                        # print(dict1)
                         # print("com:::::::", dict1)
                         result.append(dict1)
     return render(request, 'user/qualityChecker.html', {'data': result})
@@ -276,13 +290,13 @@ def payments(request):
         }
         signed_tx = web3.eth.account.signTransaction(tx, private_key)
         tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-        print(web3.toHex(tx_hash))
+        # print(web3.toHex(tx_hash))
         if renderedFrom == 'processor':
             processorKey = request.POST.get('processorKey')
             lotNumber = request.POST.get('lotNumber')
             data = database.child("user").child("Processor").child("Confirmed Farmer Orders").child(processorKey).child(
                 lotNumber).get()
-            print(data.val())
+            # print(data.val())
             temp = data.val()
             temp['paymentStatus'] = 1
             database.child("user").child("Processor").child("Confirmed Farmer Orders").child(processorKey).child(
@@ -313,9 +327,9 @@ def payments(request):
                 transaction)
             database.child("user").child("Processor").child("products").child(processorKey).child(productKey).update(
                 {"availableQuantity": int(availableQuantity)})
-            print('jssssssssssssssssssssssssssssssss')
-            print(transaction)
-            print(productKey, availableQuantity, processorKey, retailerId)
+            # print('jssssssssssssssssssssssssssssssss')
+            # print(transaction)
+            # print(productKey, availableQuantity, processorKey, retailerId)
 
     redirectTo = "/" + renderedFrom + "/"
     return redirect(redirectTo)
@@ -378,14 +392,14 @@ def processor(request):
     # print(sess)
     dataForFarmerTransactions = database.child("user").child("Processor").child("Confirmed Farmer Orders").child(
         sess).get()
-    print(dataForFarmerTransactions)
+    # print(dataForFarmerTransactions)
     if dataForFarmerTransactions.each() != None:
         for transaction in dataForFarmerTransactions.each():
             transactionKey = transaction.key()
             transactionValue = transaction.val()
-            print("-----------------", transactionValue)
+            # print("-----------------", transactionValue)
             # print(transactionValue)
-
+            print(transactionKey)
             # print(transactionValue['paymentStatus'])
             amountPayable = transactionValue['quantity'] * transactionValue['quoted price']
             temporaryData = {
@@ -407,6 +421,8 @@ def processor(request):
                 # print(reportData)
             if transactionValue['paymentStatus'] == 1:
                 continue
+            farmerName ={"farmerName" : database.child("user").child("Farmer").child(transactionValue['farmerKey']).get().val()['name']}
+            temporaryData.update(farmerName)
             pendingFarmerTransactions.append(temporaryData)
 
     for entry in data.each():
@@ -434,10 +450,13 @@ def processor(request):
     if interestData is not None:
         for interestKey, jsonValue in interestData.items():
             if jsonValue['rejected'] == "1":
+                farmerName = {'farmerName': database.child("user").child("Farmer").child(jsonValue['farmerKey']).get().val()['name']}
+                jsonValue.update(farmerName)
                 rejectedInterests.append(jsonValue)
             else:
+                farmerName = {'farmerName': database.child("user").child("Farmer").child(jsonValue['farmerKey']).get().val()['name']}
+                jsonValue.update(farmerName)
                 processorInterests.append(jsonValue)
-
         # Transaction History Orders Data
     transactionHistoryValues = []
     dataForTransaction = database.child('user').child('Processor').child('Confirmed Farmer Orders').child(sess).get()
@@ -446,6 +465,8 @@ def processor(request):
             tempTransact = transactions.val()
             tempTransact.update({'confirmedKey': transactions.key()})
             if (tempTransact['paymentStatus'] == 1 and tempTransact['reportStatus'] == 1):
+                farmerName = {"farmerName": database.child("user").child("Farmer").child(tempTransact['farmerKey']).get().val()['name']}
+                tempTransact.update(farmerName)
                 transactionHistoryValues.append(tempTransact)
 
     data = database.child("user").child("Processor").child("Confirmed Farmer Orders").child(processorId).get()
@@ -475,6 +496,7 @@ def processor(request):
                 'availableQuantity': int(request.POST.get('quantity'))
             }
             database.child("user").child("Processor").child('products').child(processorId).push(product)
+
 
     # display orders done with retailer
     temp1 = database.child("user").child("Retailer").child('Confirmed Processor Orders').get()
@@ -512,7 +534,7 @@ def processor(request):
                                                    'processorInterests': processorInterests,
                                                    'rejectedInterests': rejectedInterests,
                                                    'transactionHistory': transactionHistoryValues, 'lots': lots,
-                                                   'orderDetails': RorderDetails, 'broadcastList': broadcastList})
+                                                   'orderDetails': RorderDetails, 'broadcastList': broadcastList })
 
 
 def signIn(request):
@@ -583,8 +605,9 @@ def postsignUp(request):
     name = request.POST.get('name')
     email = request.POST.get('email')
     passw = request.POST.get('pass')
+    address = request.POST.get('address')
     stake = request.POST['drop']
-    address = request.POST['address']
+
     user = auth.create_user_with_email_and_password(email, passw)
     print(stake)
     print(email)
@@ -947,4 +970,7 @@ def getData(request):
                     return JsonResponse(temp,safe=False)
         print(yieldId)
         print(lotId)
+
+def sponsor(request):
+    return render(request,"user/sponsor.html")
 

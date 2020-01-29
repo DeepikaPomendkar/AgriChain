@@ -22,8 +22,7 @@ class Commodity:
         self.regressor = DecisionTreeRegressor(max_depth=10, random_state=0)
         self.regressor.fit(self.X, self.Y)
 
-        print("------------------------------Regressor------------------")
-      
+
         #y_pred_tree = self.regressor.predict(X_test)
         # fsa=np.array([float(1),2019,45]).reshape(1,3)
         # fask=regressor_tree.predict(fsa)
@@ -31,7 +30,6 @@ class Commodity:
     def getPredictedValue(self, value):
         if value[1]>=2019:
             fsa = np.array(value).reshape(1, 3)
-            #print(" ",self.regressor.predict(fsa)[0])
             return self.regressor.predict(fsa)[0]
         else:
             c=self.X[:,0:2]
@@ -44,9 +42,6 @@ class Commodity:
                 if x[i]==fsa:
                     ind=i
                     break
-            #print(index, " ",ind)
-            #print(x[ind])
-            #print(self.Y[i])
             return self.Y[i]
 
     def getCropName(self):
@@ -183,11 +178,7 @@ def TopFiveWinners():
         perc, i = sorted_change[j]
         # name = 'name'
         name = commodity_list[i].getCropName()
-        print('gfyugfygdskufgsbfygfugkufysifgusi------')
-        print(name)
         to_send.append([name, round((current_month_prediction[i] * base[name]) / 100, 2), round(perc, 2)])
-    print('rushabh')
-    print(to_send)
     return to_send
 
 def TopFiveLosers():
