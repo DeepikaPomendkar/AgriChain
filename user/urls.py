@@ -18,4 +18,6 @@ urlpatterns = [
     path('farmer/getData/',views.getData,name='getData'),
     path('retailer/getData/',views.getData,name='getData'),
     path('sponsor/',views.sponsor,name='sponsor'),
+    path('farmer/map/',views.farmerMap,name='farmer-map'),
+    path('farmer/info/',views.farmerInfo,name='farmer-info')
 ]

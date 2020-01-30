@@ -21,7 +21,11 @@
       <a id="2" class="show" style="margin-left:20px;cursor: pointer;"> Farmer Broadcasts </a><br><br>
       <a id="3" class="show" style="margin-left:20px;cursor: pointer;"> Processor Requests </a><br><br>
       <a id="5" class="show" style="margin-left:20px;cursor: pointer;"> Transactions </a><br><br>
-      <a id="4" class="show" style="margin-left:20px;cursor: pointer;"> Lot Status </a></h3>
+      <a id="4" class="show" style="margin-left:20px;cursor: pointer;"> Lot Status </a><br><br>
+          <a id="6" class="show" style="margin-left:20px;cursor: pointer;"> Micro Finance</a><br><br>
+<!--      <a id="7" class="show" style="margin-left:20px;cursor: pointer;"> Nearby Warehouse </a><br><br>-->
+          <a href="{% url 'farmer-map' %}" style="margin-left:20px;cursor: pointer color:black"> New Page Warehouse </a><br><br>
+      <a href="{% url 'farmer-info' %}" style="margin-left:20px;cursor: pointer color:black"> Learn Tech</a></h3></h3>
       <!--<a id="6" class="show" style="margin-left:20px;cursor: pointer;"> Micro Finance </a></h3>-->
 
     </div>
@@ -43,8 +47,8 @@
                   <input type="text" name = "cropName" placeholder="Crop Name" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
                   <input type="text" name = "quantity" placeholder="Quantity" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
                   <input type="text" name = "expectedPrice" placeholder="Expected Price" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
-                  <input type="hidden" id="lat" name="latitude" value="123">
-                  <input type="hidden" id="lon" name ="longitude" value="34">
+                  <input type="hidden" id="lat1" name="latitude" value="123">
+                  <input type="hidden" id="lon1" name ="longitude" value="34">
                   <button type="submit" class="btn btn-primary" name="broadcast" style="margin-top: 10px;border-radius: 25px;width:200px">Submit Details!!</button>
 
               </form>
@@ -244,16 +248,83 @@
                   <input type="text" name = "location" placeholder="Location" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
                   <input type="text" name = "quantity" placeholder="Quantity" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
                   <input type="text" name = "price" placeholder="Price" style="margin-top: 10px;border-radius: 25px;width:375px"/><br>
-                  <input type="hidden" id="lat" name="latitude" value="123">
-                  <input type="hidden" id="lon" name ="longitude" value="34">
+<!--                  <input type="hidden" id="lat" name="latitude" value="123">-->
+<!--                  <input type="hidden" id="lon" name ="longitude" value="34">-->
                   <button type="submit" class="btn btn-primary" name="microFarming" style="margin-top: 10px;border-radius: 25px;width:200px">Submit Details!!</button>
 
               </form>
             </div>
 
+
+            <div class="container" id="item-7" style="text-align: center;margin-top: 50px">
+              <div class="row"  style="text-align: center">
+                <h4>Wearby Warehouse</h4>
+              </div>
+              <div class="row example-1 scrollbar-deep-purple scrollbar-light-blue "  >
+                  <div class="col-md-8" id="map" style = "height:100%"></div>
+
+                      <script>
+                          mapboxgl.accessToken = "{{ mapbox_access_token }}";
+                          var geojson = {{geojson|safe}}
+
+                          var map = new mapboxgl.Map({
+                          container: 'map',
+                          style: 'mapbox://styles/mapbox/streets-v11',
+                          center: [-65.017, -16.457],
+                          zoom: 5
+                          });
+
+
+                          // add markers to map
+                          geojson.features.forEach(function(marker) {
+                          // create a DOM element for the marker
+                            var el = document.createElement('div');
+                            var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+                              marker.properties.details
+                              );
+                            el.className = 'marker';
+                            el.style.backgroundImage =
+                            'url(https://placekitten.com/g/' +
+                            marker.properties.iconSize.join('/') +
+                            '/)';
+                            el.style.width = marker.properties.iconSize[0] + 'px';
+                            el.style.height = marker.properties.iconSize[1] + 'px';
+
+                            el.addEventListener('click', function() {
+                            // window.alert(marker.properties.message);
+
+                              const element = document.querySelector("#one");
+                              if (element.classList.contains("hidden")){
+                              element.classList.add("show")
+                              }
+                              else{
+                              element.classList.add("hidden")
+                              }
+
+                            });
+
+
+                          // add marker to map
+                            new mapboxgl.Marker(el)
+                            .setLngLat(marker.geometry.coordinates)
+                            .setPopup(popup)
+                            .addTo(map);
+
+                          });
+
+
+
+
+
+
+                      </script>
+                    </div>
+
+
+                  </div>
+              </div>
+
             </div>
    </div>
 {% endblock content %}
 
-
-<!--</form>-->

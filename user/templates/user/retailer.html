@@ -1,5 +1,5 @@
 {% extends "user/base.html" %}
-
+{% load static %}
 {% block content %}
 
 <style type="text/css">
@@ -77,7 +77,7 @@
          </div>
          <div class="row example-1 scrollbar-deep-purple scrollbar-light-blue "   >
 
-             {% for x in orderDetails %}
+             {% for x in transactionDetails %}
 
                <div class="col-md-4" style="margin-top: 10px">
                  <div class="card " >
@@ -85,7 +85,7 @@
                      <h5><p class="card-text"><u>Product Name:</u> {{x.productName}}</p>
                      <br>
                      <p class="card-text"><u>Quantity:</u> {{x.requiredQuantity}}</p>
-
+                     <img src="{%static x.qrUrl %}" style="height:100px;width:100px">
                      <br>
                      <p class="card-text"><u>Price:</u> {{x.Price}}Rs</p></h5>
                      <br>
@@ -256,5 +256,6 @@
 
        </div>
 </div>
+ </div>
 </body>
 {% endblock content %}
