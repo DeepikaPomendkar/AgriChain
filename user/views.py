@@ -65,9 +65,16 @@ def farmer(request):
                 'location': request.POST.get('location'),
                 'quantity': request.POST.get('quantity'),
                 'price': request.POST.get('price'),
+                'expDate': request.POST.get('expDate'),
                 'sponsorStatus': 0,
+
             }
-            database.child("user").child("Farmer").child('microFarming').child(sess).child(request.POST.get('yieldId')).set(dataTemp)
+
+            #take farmer id
+            x=database.child("user").child("Farmer").child('microFarming').child(sess).push(dataTemp)
+
+            lotId = x['name']
+            #### push in blockchain
         if "insurance" in request.POST:
             # print("insure")
 
