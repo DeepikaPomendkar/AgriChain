@@ -25,11 +25,21 @@ firebaseConfig = {
 ganache_url = "http://127.0.0.1:7545"
 web3 = Web3(Web3.HTTPProvider(ganache_url))
 web3.eth.defaultAccount = web3.eth.accounts[0]
-abi = json.loads(
-    '[{"constant":false,"inputs":[{"name":"_batchNumber","type":"string"},{"name":"_lotNumber","type":"string"}],"name":"BatchtoLot","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_processor","type":"address"},{"name":"_farmer","type":"address"},{"name":"_lotNumber","type":"string"},{"name":"_remarks","type":"string"},{"name":"_receivedShipment","type":"string"}],"name":"addProcessorReport","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_retailer","type":"address"},{"name":"_batchNumber","type":"string"}],"name":"getRetailerReport","outputs":[{"name":"_productName","type":"string"},{"name":"_remarks","type":"string"},{"name":"_rawMaterial","type":"string"},{"name":"_manufacturedDate","type":"string"},{"name":"_quantity","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_processor","type":"address"},{"name":"_farmer","type":"address"},{"name":"_lotNumber","type":"string"}],"name":"getProcessorReport","outputs":[{"name":"_remarks","type":"string"},{"name":"_receivedShipment","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_retailer","type":"address"},{"name":"_retailerKey","type":"string"}],"name":"addRetailer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_processor","type":"address"},{"name":"_processorKey","type":"string"}],"name":"addProcessor","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_retailer","type":"address"},{"name":"_processor","type":"address"},{"name":"_farmer","type":"address"},{"name":"_remarks","type":"string"},{"name":"_rawMaterial","type":"string"},{"name":"_productName","type":"string"},{"name":"_manufacturedDate","type":"string"},{"name":"_quantity","type":"int256"},{"name":"_batchNumber","type":"string"}],"name":"addRetailerReport","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_farmer","type":"address"},{"name":"_lotNumber","type":"string"}],"name":"getQualityReport","outputs":[{"name":"_remarks","type":"string"},{"name":"_inspector","type":"address"},{"name":"_sampleSize","type":"int256"},{"name":"_defective","type":"int256"},{"name":"_quantity","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_farmer","type":"address"},{"name":"_farmerKey","type":"string"}],"name":"addFarmer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_farmer","type":"address"},{"name":"_inspector","type":"address"},{"name":"_lotNumber","type":"string"},{"name":"_remarks","type":"string"},{"name":"_sampleSize","type":"int256"},{"name":"_quantity","type":"int256"},{"name":"_defective","type":"int256"}],"name":"addQualityReport","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_inspector","type":"address"},{"name":"_inspectorKey","type":"string"}],"name":"addInspector","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"farmerAddress","type":"address"},{"indexed":false,"name":"farmerKey","type":"string"}],"name":"farmerAddition","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"processorAddress","type":"address"},{"indexed":false,"name":"processorKey","type":"string"}],"name":"processorAddition","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"retailerAddress","type":"address"},{"indexed":false,"name":"retailerKey","type":"string"}],"name":"retailerAddition","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"inspectoAddress","type":"address"},{"indexed":false,"name":"inspectoKey","type":"string"}],"name":"inspectorAddition","type":"event"}]')
+abi = json.loads('[{"constant":false,"inputs":[{"name":"customer","type":"address"},{"name":"farmer","type":"address"},{"name":"terms","type":"string"},{"name":"amount","type":"uint256"},{"name":"holdingPercent","type":"uint256"},{"name":"yieldId","type":"string"},{"name":"dealId","type":"string"}],"name":"addDeal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"customer","type":"address"},{"name":"company","type":"address"},{"name":"amount","type":"uint256"}],"name":"makePayments","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"amount","type":"uint256"}],"name":"redeemWallet","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"invoice","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"farmer","type":"address"},{"name":"farmerId","type":"string"}],"name":"addFarmer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"account","type":"address"}],"name":"getBalanceAccount","outputs":[{"name":"_balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"amount","type":"uint256"}],"name":"addFundsToWallet","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"farmerId","type":"string"},{"name":"yieldId","type":"string"},{"name":"landLocation","type":"string"},{"name":"crop","type":"string"},{"name":"quantity","type":"uint256"},{"name":"expDate","type":"string"},{"name":"expectedPrice","type":"uint256"}],"name":"addProduce","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"farmerId","type":"string"}],"name":"getProduce","outputs":[{"name":"expDate","type":"string"},{"name":"quantity","type":"uint256"},{"name":"expectedPrice","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"dealId","type":"string"}],"name":"getDeal","outputs":[{"name":"terms","type":"string"},{"name":"amount","type":"uint256"},{"name":"holdingPercent","type":"uint256"},{"name":"farmer","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"farmer","type":"address"},{"indexed":false,"name":"farmerId","type":"string"}],"name":"farmerAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"farmerId","type":"string"},{"indexed":false,"name":"crop","type":"string"},{"indexed":false,"name":"expectedPrice","type":"uint256"},{"indexed":false,"name":"expDate","type":"string"}],"name":"produceAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"customer","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"rechargeWallet","type":"event"}]')
 address = web3.toChecksumAddress('0xfb0a215ce2d9748dbac279aed48e918564af9b39')
 
 contract = web3.eth.contract(address=address, abi=abi)
+
+
+
+##############micro fonance
+
+abi1 = json.loads('[{"constant":false,"inputs":[{"name":"customer","type":"address"},{"name":"farmer","type":"address"},{"name":"terms","type":"string"},{"name":"amount","type":"uint256"},{"name":"holdingPercent","type":"uint256"},{"name":"yieldId","type":"string"},{"name":"dealId","type":"string"}],"name":"addDeal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"customer","type":"address"},{"name":"company","type":"address"},{"name":"amount","type":"uint256"}],"name":"makePayments","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"amount","type":"uint256"}],"name":"redeemWallet","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"invoice","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"farmer","type":"address"},{"name":"farmerId","type":"string"}],"name":"addFarmer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"account","type":"address"}],"name":"getBalanceAccount","outputs":[{"name":"_balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"amount","type":"uint256"}],"name":"addFundsToWallet","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"farmerId","type":"string"},{"name":"yieldId","type":"string"},{"name":"landLocation","type":"string"},{"name":"crop","type":"string"},{"name":"quantity","type":"uint256"},{"name":"expDate","type":"string"},{"name":"expectedPrice","type":"uint256"}],"name":"addProduce","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"farmerId","type":"string"}],"name":"getProduce","outputs":[{"name":"expDate","type":"string"},{"name":"quantity","type":"uint256"},{"name":"expectedPrice","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"dealId","type":"string"}],"name":"getDeal","outputs":[{"name":"terms","type":"string"},{"name":"amount","type":"uint256"},{"name":"holdingPercent","type":"uint256"},{"name":"farmer","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"farmer","type":"address"},{"indexed":false,"name":"farmerId","type":"string"}],"name":"farmerAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"farmerId","type":"string"},{"indexed":false,"name":"crop","type":"string"},{"indexed":false,"name":"expectedPrice","type":"uint256"},{"indexed":false,"name":"expDate","type":"string"}],"name":"produceAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"customer","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"rechargeWallet","type":"event"}]')
+address1 = web3.toChecksumAddress('0xe0115a7cfa6d18126a3c9196af1c3ccf6ecb24d4')
+
+contract1 = web3.eth.contract(address=address1,abi=abi1)
+
+
 
 firebase = pyrebase.initialize_app(firebaseConfig)
 database = firebase.database()
@@ -39,6 +49,7 @@ auth = firebase.auth()
 def farmer(request):
     sess = request.session['uid']
     data = database.child("user").child("Farmer").child(sess).get()
+    farmerAddress = data.val()['address']
     farmerName = data.val()['name']
     if request.method == 'POST':
         if "broadcast" in request.POST:
@@ -58,8 +69,20 @@ def farmer(request):
             database.child("user").child("Farmer").child('yields').child(sess).push(temp)
         if "microFarming" in request.POST:
             # print('sssssssssss', request.POST)
+            farmerName1= request.POST.get('farmerName')
+            cropName1= request.POST.get('cropName')
+            location1= request.POST.get('location')
+            quantity1= int(request.POST.get('quantity'))
+            price1= int(request.POST.get('price'))
+            expDate1= request.POST.get('expDate')
+            sponsorStatus1= 0
+
+
+
+
+
             dataTemp = {
-                'yieldId': request.POST.get('yieldId'),
+                
                 'farmerName': request.POST.get('farmerName'),
                 'cropName': request.POST.get('cropName'),
                 'location': request.POST.get('location'),
@@ -67,14 +90,93 @@ def farmer(request):
                 'price': request.POST.get('price'),
                 'expDate': request.POST.get('expDate'),
                 'sponsorStatus': 0,
+                'received':0
 
             }
 
             #take farmer id
             x=database.child("user").child("Farmer").child('microFarming').child(sess).push(dataTemp)
 
-            lotId = x['name']
+            yeildId = x['name']
             #### push in blockchain
+
+            tx_hash=contract1.functions.addFarmer(farmerAddress,sess).transact()
+            tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
+
+
+            tx_hash=contract1.functions.addProduce(sess,yeildId,location1,cropName1,quantity1,expDate1,price1).transact()
+            tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
+            print("yeah")
+
+        if 'acceptDeal' in request.POST:
+            holdingPercent= int(request.POST.get('holdingPercent'))
+            yeildId= request.POST.get('yeildId')
+            dealId= request.POST.get('dealId')
+            tandS= request.POST.get('tandS')
+            amount= int(request.POST.get('amount'))
+            price= int(request.POST.get('price'))
+            investorId= request.POST.get('investorId')
+            dealStatusChange = database.child('user').child('Farmer').child('microFarming').child(sess).child(yeildId).get().val()
+            print("##############################",dealStatusChange)
+             # add amount to expected value 
+            if(int(dealStatusChange['received']) + amount )<=price:
+
+                
+                dealStatusChange['received'] = int(dealStatusChange['received']) + amount
+                newReceived = int(dealStatusChange['received']) + amount
+                # add to blockchain
+                investorAddress =web3.toChecksumAddress(database.child('user').child('Investor').child(investorId).get().val()['address'])
+                farmerAddress =web3.toChecksumAddress(database.child('user').child('Farmer').child(sess).get().val()['address'])
+
+
+                print(yeildId,">>>>>",dealId)
+                tx_hash = contract1.functions.addDeal(investorAddress,farmerAddress,tandS,amount,holdingPercent,yeildId,dealId).transact()
+                tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
+
+                print(contract1.functions.getDeal(dealId).call())
+
+
+
+                if (int(dealStatusChange['received']) + amount )==price:
+                    dealStatusChange['sponsorStatus'] = 1
+                    database.child('user').child('Farmer').child('microFarming').child(sess).child(yeildId).update({'sponsorStatus':1,'received':newReceived})
+                else:
+                    database.child('user').child('Farmer').child('microFarming').child(sess).child(yeildId).update({'received':newReceived})
+                    database.child('user').child('Farmer').child('microFarming').child(sess).child(yeildId).child('deals').child(dealId).update({'status':1})
+
+
+
+                for key,value in dealStatusChange['deals'].items():
+                    if key == dealId:
+                        database.child('user').child('Farmer').child('microFarming').child(sess).child(yeildId).child('deals').child(dealId).update({'status':1})
+                        # make status in investors 1
+                        changeInvestorStatus = database.child('user').child('Investor').child(investorId).child('deals').get().val()
+
+                        for key, value in changeInvestorStatus.items():
+                            if value['dealId']==dealId:
+                                database.child('user').child('Investor').child(investorId).child('deals').child(key).update({'status':1})
+
+
+
+        if 'rejectDeal' in request.POST:
+            
+            yeildId= request.POST.get('yeildId')
+            dealId= request.POST.get('dealId')
+            
+            investorId= request.POST.get('investorId')
+            database.child('user').child('Farmer').child('microFarming').child(sess).child(yeildId).child('deals').child(dealId).update({'status':-1})
+            inves=database.child('user').child('Investor').child(investorId).child('deals').get().val()
+            for key, value in inves.items():
+                if value['dealId']==dealId:
+                    database.child('user').child('Investor').child(investorId).child('deals').child(key).update({'status':-1})
+
+
+
+           
+            
+            
+
+
         if "insurance" in request.POST:
             # print("insure")
 
@@ -226,6 +328,72 @@ def farmer(request):
     #     ]
     # }
 
+    farmerYeildBrodcasts = database.child('user').child('Farmer').child('microFarming').child(sess).get().val()
+    yourYeildBrodcasts = []
+    yourDeals=[]
+    if farmerYeildBrodcasts is not None:
+        for key,value in farmerYeildBrodcasts.items():
+            temp={}
+            temp['yeildId']=key
+            temp = {
+                    
+                'farmerName': value['farmerName'],
+                'cropName': value['cropName'],
+                'location': value['location'],
+                'quantity': value['quantity'],
+                'price': value['price'],
+                'expDate':value['expDate'],
+                'sponsorStatus': 0,
+                'received':0
+                }
+            yourYeildBrodcasts.append(temp)
+
+            if 'deals' in value:
+                for key1,deal in value['deals'].items():
+                    temp1 ={}
+                    temp1['dealId']=key1
+                    temp1.update(deal)
+                    temp1.update(temp)
+                    if deal['status']==0 :
+                        yourDeals.append(temp1)
+
+
+    acceptedDeals =  database.child('user').child('Farmer').child('microFarming').child(sess).get().val()
+    acceptedList=[]
+    for key, value in acceptedDeals.items():
+        if 'deals' in value:
+            for key1,info1 in value['deals'].items():
+
+                if info1['status']==1:
+                    print("@@@@@@@@@@@@")
+                    temp = {
+                        
+                    'farmerName': value['farmerName'],
+                    'cropName': value['cropName'],
+                    'location': value['location'],
+                    'quantity': value['quantity'],
+                    'price': value['price'],
+                    'expDate':value['expDate'],
+                    
+                    'received':value['received']
+                    }
+                    temp.update(info1)
+                    acceptedList.append(temp)
+                    print("@@@@@@@@@@@@",acceptedList)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     geojson = {
         'type': 'FeatureCollection',
         'features': [],
@@ -281,7 +449,7 @@ def farmer(request):
     return render(request, 'user/farmer.html', {'data': temp1, 'results': results, 'farmerName': farmerName,
                                                 'transactionHistoryValues': transactionHistoryValues, 'stake': "farmer",
                                                 'mapbox_access_token': mapbox_access_token,
-                                                'geojson': json.dumps(geojson)})
+                                                'geojson': json.dumps(geojson),'yourYeildBrodcasts':yourYeildBrodcasts,'yourDeals':yourDeals,'acceptedList':acceptedList})
 
 
 def qualityChecker(request):
@@ -704,6 +872,8 @@ def postsign(request):
         return redirect("/processor/")
     if stake == "Quality Checker":
         return redirect("/qualityChecker/")
+    if stake == "Investor":
+        return redirect("/investor/")
 
 
 def signUp(request):
@@ -898,7 +1068,7 @@ def retailer(request):
                 print("******************")
                 print(qrInfo)
                 url = pyqrcode.create(qrInfo)
-                qrPath = "D:/PyCharmProjects/hackRush/AgriChain/user/static/Images/QRfiles/" + transactionKeys['transactionKey'] + ".svg"
+                qrPath = "D:/AgriChain/user/static/images/QRfiles/" + transactionKeys['transactionKey'] + ".svg"
                 details['qrUrl'] = "Images/QRfiles/" + transactionKeys['transactionKey'] + ".svg"
                 url.svg(qrPath, scale=8)
                 transactionDetails.append(details)
@@ -1164,3 +1334,113 @@ def farmerMap(request):
 def farmerInfo(request):
 
     return render(request,'user/education.html')
+
+
+def investor(request):
+
+    sess = request.session['uid']
+    data = database.child("user").child("Investor").child(sess).get()
+    investorAddress = data.val()['address']
+    farmerList = database.child('user').child('Farmer').child('microFarming').get()
+    produceList=[]
+    if request.method == "POST":
+        if 'investAmount' in request.POST:
+            amount = int(request.POST.get('amount'))
+            farmerId = request.POST.get('farmerId')
+            yeildId = request.POST.get('yeildId')
+            holdingPercent = int(request.POST.get('holdingPer'))
+
+            tandS = 'Pay Before 1.5 yr'
+            deal =0
+            farmerStatus = database.child('user').child('Farmer').child('microFarming').child(farmerId).child(yeildId).get().val()
+            data = database.child("user").child("Farmer").child(farmerId).get()
+            farmerAddress = data.val()['address']
+
+            if (int(farmerStatus['price'])-int(farmerStatus['received']))>=amount:
+
+                deal = {
+                'investorId':sess,
+                'terms':tandS,
+                'amount':amount,
+                'holdingPercent':holdingPercent,
+                'status': 0,
+                'yeildId':yeildId
+
+                }
+                print('asdfghjkl')
+
+                x = database.child('user').child('Farmer').child('microFarming').child(farmerId).child(yeildId).child('deals').push(deal)
+
+
+                dealId = x['name']
+                temp = {
+                'dealId':dealId,
+                'status':0,
+                'farmerId':farmerId,
+                'yeildId':yeildId
+                }
+                print(dealId)
+                database.child("user").child("Investor").child(sess).child('deals').push(temp)
+
+
+
+                # tx_hash = contract1.functions.addDeal(investorAddress,farmerAddress,tandS,amount,holdingPercent,yeildId,dealId).transact()
+                # tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
+
+
+
+
+    for key,item in  farmerList.val().items():
+        infodict = {}
+        farmerid = key
+        
+        print(farmerid)
+
+        yeilds = item
+
+        for key, info in item.items():
+            infodict={}
+            yeildId = key
+            # print(yeildId)
+            # print(info['sponsorStatus'])
+            infodict['farmerId']=farmerid
+            infodict['yeildId'] = yeildId
+            infodict.update(info)
+            # print(infodict)
+            # print("^^^^^^^^^^^^^")
+            if info['sponsorStatus']==0:
+                produceList.append(infodict)
+
+    rejectedDeals = database.child("user").child("Investor").child(sess).child('deals').get().val()
+    rejected =[]
+    for key, val in rejectedDeals.items():
+        if val['status']==-1:
+            yeildId = val['yeildId']
+            dealId = val['dealId']
+            farmerId = val['farmerId']
+            value = database.child('user').child('Farmer').child('microFarming').child(farmerId).child(yeildId).get().val()
+
+            temp = {
+                    
+                'farmerName': value['farmerName'],
+                'cropName': value['cropName'],
+                'location': value['location'],
+                'quantity': value['quantity'],
+                'price': value['price'],
+                'expDate':value['expDate'],
+                
+                }
+            value = database.child('user').child('Farmer').child('microFarming').child(farmerId).child(yeildId).child('deals').child(dealId).get().val()
+
+            temp.update(value)
+            rejected.append(temp)
+            
+
+
+
+
+        
+
+
+
+    return render(request,'user/investor.html',{'produceList':produceList,'rejected':rejected})

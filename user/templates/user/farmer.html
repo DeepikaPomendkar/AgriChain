@@ -12,9 +12,10 @@
 
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <div class="row" style="">
-
+    
     <div class="col-md-3" style="background: rgba(255, 255, 255, 0.4)">
         <h2 style="border-bottom:solid;text-align:center">Functions</h2><br><br>
       <h3><a id="1" class="show" style="margin-left:20px;cursor: pointer;"> Broadcast </a><br><br>
@@ -25,7 +26,10 @@
           <a id="6" class="show" style="margin-left:20px;cursor: pointer;"> Micro Finance</a><br><br>
 <!--      <a id="7" class="show" style="margin-left:20px;cursor: pointer;"> Nearby Warehouse </a><br><br>-->
           <a href="{% url 'farmer-map' %}" style="margin-left:20px;cursor: pointer color:black"> New Page Warehouse </a><br><br>
-      <a href="{% url 'farmer-info' %}" style="margin-left:20px;cursor: pointer color:black"> Learn Tech</a></h3></h3>
+      <a href="{% url 'farmer-info' %}" style="margin-left:20px;cursor: pointer color:black"> Learn Tech</a><br><br>
+      <a id="8" class="show" style="margin-left:20px;cursor: pointer;">Your Yield Brodcasts</a><br><br>
+      <a id="9" class="show" style="margin-left:20px;cursor: pointer;">Investor Deals</a><br><br>
+      <a id="10" class="show" style="margin-left:20px;cursor: pointer;">Accepted Deals</a><br><br></h3>
       <!--<a id="6" class="show" style="margin-left:20px;cursor: pointer;"> Micro Finance </a></h3>-->
 
     </div>
@@ -255,6 +259,116 @@
 
               </form>
             </div>
+            <div class="container" id="item-8" style="text-align: center;margin-top: 50px">
+              <div class="row"  style="text-align: center">
+                <h4>Your Yeild Brodcasts</h4>
+              </div>
+              <div class="row example-1 scrollbar-deep-purple scrollbar-light-blue "  >
+                  {% for dat in yourYeildBrodcasts %}
+                    <div class="col-md-4" style="margin-top: 10px">
+                      <div class="card  ">
+
+
+                              <div class="card-block">
+
+       
+                                  <h6><p class="card-text">farmerName:{{dat.farmerName}}</p>
+                                  <p class="card-text">cropName:{{dat.cropName}}</p>
+                                  <p class="card-text">location:{{dat.location}}</p>
+                                  <p class="card-text">quantity:{{dat.quantity}}</p>
+                                  <p class="card-text">price:{{dat.price}}RS</p>
+                                  <p class="card-text">expDate:{{dat.expDate}}</p>
+                                  <p class="card-text">sponsorStatus:{{dat.sponsorStatus}}</p>
+                                  <p class="card-text">received:{{dat.received}}</p>
+
+                                </h6>
+                              </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+              </div>
+            </div>
+            <div class="container" id="item-9" style="text-align: center;margin-top: 50px">
+              <div class="row"  style="text-align: center">
+                <h4>Investor Deals</h4>
+              </div>
+              <div class="row example-1 scrollbar-deep-purple scrollbar-light-blue "  >
+
+
+                {% for dat in yourDeals %}
+                    <div class="col-md-4" style="margin-top: 10px">
+                      <div class="card  ">
+                          <!--<p>Hey this is Request no 1</p>-->
+                          <form action="{% url 'farmer' %}" method="POST">
+                              {% csrf_token %}
+                              <div class="card-block">
+
+                                <h6><p class="card-text">farmerName:{{dat.farmerName}}</p>
+                                  <p class="card-text">cropName:{{dat.cropName}}</p>
+                                  <p class="card-text">location:{{dat.location}}</p>
+                                  <p class="card-text">quantity:{{dat.quantity}}</p>
+                                  <p class="card-text">price:{{dat.price}}RS</p>
+                                  <p class="card-text">expDate:{{dat.expDate}}</p>
+                                  <p class="card-text">sponsorStatus:{{dat.sponsorStatus}}</p>
+                                  <p class="card-text">received:{{dat.received}}</p>
+                                  <h5> ---------------</h5>
+                                  <p class="card-text">Amount Invested:{{dat.amount}}</p>
+                                  <p class="card-text">Holding Percent:{{dat.holdingPercent}}</p>
+                                  <input type="hidden" name ="yeildId"  value={{dat.yeildId}}>
+                                  <input type="hidden" name ="dealId"  value={{dat.dealId}}>
+                                  <input type="hidden" name ="amount"  value={{dat.amount}}>
+                                  <input type="hidden" name ="price"  value={{dat.price}}>
+                                  <input type="hidden" name ="investorId"  value={{dat.investorId}}>
+                                  <input type="hidden" name ="tandS"  value={{dat.terms}}>
+                                  <input type="hidden" name ="holdingPercent"  value={{dat.holdingPercent}}>
+
+                                  <button type="submit" name="acceptDeal"  class="btn btn-warning" >Accept Deal</button>
+                                  <button type="submit" name="rejectDeal" value="reject" class="btn btn-warning" >Reject Deal</button>
+                              </div>
+                          </form>
+                      </div>
+                    </div>
+
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="container" id="item-10" style="text-align: center;margin-top: 50px">
+              <div class="row"  style="text-align: center">
+                <h4>Accepted Deals</h4>
+              </div>
+              <div class="row example-1 scrollbar-deep-purple scrollbar-light-blue "  >
+
+
+                {% for dat in acceptedList %}
+                    <div class="col-md-4" style="margin-top: 10px">
+                      <div class="card  ">
+                          <!--<p>Hey this is Request no 1</p>-->
+                 
+                              
+                              <div class="card-block">
+
+                                <h6><p class="card-text">farmerName:{{dat.farmerName}}</p>
+                                  <p class="card-text">cropName:{{dat.cropName}}</p>
+                                  <p class="card-text">location:{{dat.location}}</p>
+                                  <p class="card-text">quantity:{{dat.quantity}}</p>
+                                  <p class="card-text">price:{{dat.price}}RS</p>
+                                  <p class="card-text">expDate:{{dat.expDate}}</p>
+                                  <p class="card-text">sponsorStatus:{{dat.sponsorStatus}}</p>
+                                  <p class="card-text">received:{{dat.received}}</p>
+                                  <h5> ---------------</h5>
+                                  <p class="card-text">Amount Invested:{{dat.amount}}</p>
+                                  <p class="card-text">Holding Percent:{{dat.holdingPercent}}</p>
+                                  
+                                
+                              </div>
+                      
+                      </div>
+                    </div>
+
+                {% endfor %}
+              </div>
+            </div>
 
 
             <div class="container" id="item-7" style="text-align: center;margin-top: 50px">
@@ -326,6 +440,7 @@
               </div>
 
             </div>
+            
    </div>
 {% endblock content %}
 

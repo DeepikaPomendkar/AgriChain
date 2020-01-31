@@ -14,6 +14,7 @@ urlpatterns = [
     path('retailer/',views.retailer,name='retailer'),
     path('customer/',views.customer,name='customer'),
     path('qualityChecker/',views.qualityChecker,name='qualityChecker'),
+    path('investor/',views.investor,name='investor'),
     path('payments/',views.payments,name='payments'),
     path('farmer/getData/',views.getData,name='getData'),
     path('retailer/getData/',views.getData,name='getData'),
